@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tkurek.wat.Etl.mapper.TestMapper">
+
+    <select id="testSelect" resultType="java.lang.String" parameterType="long">
+        select m.name
+        from Mark as m
+        where m.ID_MARK = #{id}
+    </select>
+
+</mapper>
