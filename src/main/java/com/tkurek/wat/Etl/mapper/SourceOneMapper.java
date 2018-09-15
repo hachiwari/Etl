@@ -1,10 +1,8 @@
 package com.tkurek.wat.Etl.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-@Mapper
-public interface TestMapper {
+public interface SourceOneMapper {
 
     String testSelect(@Param("id") Long id);
 }
