@@ -4,12 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-
     <import resource="classpath*:spring/sourceOne.xml"/>
     <import resource="classpath*:spring/sourceTwo.xml"/>
 
-    <bean id="app" class="com.tkurek.wat.Etl.EtlApplication">
-        <property name="sourceOneMapper" ref="sourceOneMapper"/>
-        <property name="sourceTwoMapper" ref="sourceTwoMapper"/>
-    </bean>
+    <!--<bean id="app" class="com.tkurek.wat.Etl.controller.EtlController">-->
+        <!--<property name="sourceOneMapper" ref="sourceOneMapper"/>-->
+        <!--<property name="sourceTwoMapper" ref="sourceTwoMapper"/>-->
+    <!--</bean>-->
+
 </beans>

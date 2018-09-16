@@ -24,8 +24,8 @@
 
     <!--Liquibase-->
     <bean id="sourceTwoLiquibase" class="liquibase.integration.spring.SpringLiquibase">
-        <property name="dataSource" ref="dataSourceOne" />
-        <property name="changeLog" value="classpath*:db/changelog/sourceOne/*.xml" />
+        <property name="dataSource" ref="dataSourceTwo" />
+        <property name="changeLog" value="classpath*:db/changelog/sourceTwo/*.xml" />
     </bean>
 
 </beans>

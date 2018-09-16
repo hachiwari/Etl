@@ -6,9 +6,9 @@
 <mapper namespace="com.tkurek.wat.Etl.mapper.SourceTwoMapper">
 
     <select id="testSelect2" resultType="java.lang.String" parameterType="long">
-        select p.name
-        from player as p
-        where p.account_id = #{id}
+        select r.name
+        from region as r
+        where r.idRegion = #{id}
     </select>
 
 </mapper>
