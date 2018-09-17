@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean name="dataWarehouse" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="${spring.datasource.warehouse.url}" />
+        <property name="username" value="${spring.datasource.warehouse.username}" />
+        <property name="password" value="${spring.datasource.warehouse.password}" />
+        <property name="driverClassName" value="${spring.datasource.warehouse.driver-class-name}" />
+    </bean>
+
+    <!-- MyBatis -->
+    <bean id="warehouseSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataWarehouse" />
+        <property name="mapperLocations" value="classpath*:db/mapper/WarehouseMapper.xml" />
+    </bean>
+
+    <bean id="warehouseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.tkurek.wat.Etl.mapper.WarehouseMapper" />
+        <property name="sqlSessionFactory" ref="warehouseSessionFactory" />
+    </bean>
+
+    <!-- Liquibase -->
+    <bean id="warehouseLiquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataWarehouse" />
+        <property name="changeLog" value="classpath*:db/changelog/warehouse/*.xml" />
+    </bean>
+
+</beans>

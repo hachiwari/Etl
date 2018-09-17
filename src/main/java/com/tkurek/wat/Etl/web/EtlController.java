@@ -1,7 +1,6 @@
-package com.tkurek.wat.Etl.controller;
+package com.tkurek.wat.Etl.web;
 
-import com.tkurek.wat.Etl.mapper.SourceOneMapper;
-import com.tkurek.wat.Etl.mapper.SourceTwoMapper;
+import com.tkurek.wat.Etl.service.ExtractService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +13,20 @@ public class EtlController {
 
     private static final Logger LOG = LoggerFactory.getLogger(EtlController.class);
 
-    private SourceOneMapper sourceOneMapper;
-    private SourceTwoMapper sourceTwoMapper;
+    private ExtractService extractService;
 
     @Autowired
-    private EtlController(SourceOneMapper sourceOneMapper, SourceTwoMapper sourceTwoMapper) {
-        this.sourceOneMapper = sourceOneMapper;
-        this.sourceTwoMapper = sourceTwoMapper;
+    private EtlController(ExtractService extractService) {
+        this.extractService = extractService;
     }
 
     @ResponseBody
     @RequestMapping("/runEtl")
     String runEtl() {
-        String ret = this.sourceOneMapper.testSelect(1L) + " " + this.sourceTwoMapper.testSelect2(2L);
-        return ret;
+        this.extractService.extractSources();
+        //TODO transform and load
+        LOG.info("Success!");
+        return "Success!";
     }
 
 }

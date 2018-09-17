@@ -5,10 +5,24 @@
 
 <mapper namespace="com.tkurek.wat.Etl.mapper.SourceTwoMapper">
 
-    <select id="testSelect2" resultType="java.lang.String" parameterType="long">
-        select r.name
-        from region as r
-        where r.idRegion = #{id}
+    <select id="selectAllLocality" resultType="com.tkurek.wat.Etl.model.sourceTwo.SourceTwo_Locality">
+        select * from locality;
+    </select>
+
+    <select id="selectAllRegion" resultType="com.tkurek.wat.Etl.model.sourceTwo.SourceTwo_Region">
+        select * from region;
+    </select>
+
+    <select id="selectAllShop" resultType="com.tkurek.wat.Etl.model.sourceTwo.SourceTwo_Shop">
+        select * from shop;
+    </select>
+
+    <select id="selectAllTypeWorker" resultType="com.tkurek.wat.Etl.model.sourceTwo.SourceTwo_TypeWorker">
+        select * from typeWorker;
+    </select>
+
+    <select id="selectAllWorker" resultType="com.tkurek.wat.Etl.model.sourceTwo.SourceTwo_Worker">
+        select * from worker;
     </select>
 
 </mapper>

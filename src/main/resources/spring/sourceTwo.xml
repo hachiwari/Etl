@@ -11,10 +11,10 @@
         <property name="driverClassName" value="${spring.datasource.sourceTwo.driver-class-name}" />
     </bean>
 
-    <!--MAPPER - MyBatis-->
+    <!-- MyBatis -->
     <bean id="sourceTwoSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSourceTwo" />
-        <property name="mapperLocations" value="classpath*:db/mapper/**/*.xml" />
+        <property name="mapperLocations" value="classpath*:db/mapper/SourceTwoMapper.xml" />
     </bean>
 
     <bean id="sourceTwoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
@@ -22,7 +22,7 @@
         <property name="sqlSessionFactory" ref="sourceTwoSessionFactory" />
     </bean>
 
-    <!--Liquibase-->
+    <!-- Liquibase -->
     <bean id="sourceTwoLiquibase" class="liquibase.integration.spring.SpringLiquibase">
         <property name="dataSource" ref="dataSourceTwo" />
         <property name="changeLog" value="classpath*:db/changelog/sourceTwo/*.xml" />

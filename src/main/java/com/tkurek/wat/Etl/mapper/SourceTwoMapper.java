@@ -1,8 +1,15 @@
 package com.tkurek.wat.Etl.mapper;
 
-import org.apache.ibatis.annotations.Param;
+import com.tkurek.wat.Etl.model.sourceTwo.*;
+
+import java.util.Collection;
 
 public interface SourceTwoMapper {
 
-    String testSelect2(@Param("id") Long id);
+    Collection<SourceTwo_Locality> selectAllLocality();
+    Collection<SourceTwo_Region> selectAllRegion();
+    Collection<SourceTwo_Shop> selectAllShop();
+    Collection<SourceTwo_TypeWorker> selectAllTypeWorker();
+    Collection<SourceTwo_Worker> selectAllWorker();
+
 }

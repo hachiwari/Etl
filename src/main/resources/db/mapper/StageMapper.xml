@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tkurek.wat.Etl.mapper.StageMapper">
+
+    <select id="selectAllBrand" resultType="com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Brand">
+        select * from brand;
+    </select>
+
+    <select id="selectAllCountry" resultType="com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Country">
+        select * from country;
+    </select>
+
+    <select id="selectAllProducer" resultType="com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Producer">
+        select * from producer;
+    </select>
+
+    <select id="selectAllProduct" resultType="com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Product">
+        select * from product;
+    </select>
+
+    <select id="selectAllProvider" resultType="com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Provider">
+        select * from provider;
+    </select>
+
+    <select id="selectAllTypePrice" resultType="com.tkurek.wat.Etl.model.stage.sourceOne.Stage_TypePrice">
+        select * from typePrice;
+    </select>
+
+    <select id="selectAllLocality" resultType="com.tkurek.wat.Etl.model.stage.sourceTwo.Stage_Locality">
+        select * from locality;
+    </select>
+
+    <select id="selectAllRegion" resultType="com.tkurek.wat.Etl.model.stage.sourceTwo.Stage_Region">
+        select * from region;
+    </select>
+
+    <select id="selectAllShop" resultType="com.tkurek.wat.Etl.model.stage.sourceTwo.Stage_Shop">
+        select * from shop;
+    </select>
+
+    <select id="selectAllTypeWorker" resultType="com.tkurek.wat.Etl.model.stage.sourceTwo.Stage_TypeWorker">
+        select * from typeWorker;
+    </select>
+
+    <select id="selectAllWorker" resultType="com.tkurek.wat.Etl.model.stage.sourceTwo.Stage_Worker">
+        select * from worker;
+    </select>
+
+    <insert id="insertBrand" useGeneratedKeys="true" keyProperty="brand.id" keyColumn="id">
+        insert into brand (idBrand, idProducer, name, subBrand, timestampFrom, timestampTo)
+         values (#{brand.idBrand}, #{brand.idProducer}, #{brand.name}, #{brand.subBrand}, #{brand.timestampFrom}, #{brand.timestampTo});
+    </insert>
+
+    <update id="updateBrand">
+        update brand
+        set
+          idBrand = #{brand.idBrand},
+          idProducer = #{brand.idProducer},
+          name = #{brand.name},
+          subBrand = #{brand.subBrand},
+          timestampFrom = #{brand.timestampFrom},
+          timestampTo = #{brand.timestampTo}
+        where id = #{brand.id};
+    </update>
+
+    <insert id="insertCountry" useGeneratedKeys="true" keyProperty="country.id" keyColumn="id">
+        insert into country (idCountry, name, code, timestampFrom, timestampTo)
+         values (#{country.idCountry}, #{country.name}, #{country.code}, #{country.timestampFrom}, #{country.timestampTo});
+    </insert>
+
+    <update id="updateCountry">
+        update country
+        set
+          idCountry = #{country.idCountry},
+          name = #{country.name},
+          code = #{country.code},
+          timestampFrom = #{country.timestampFrom},
+          timestampTo = #{country.timestampTo}
+        where id = #{country.id};
+    </update>
+
+    <insert id="insertProducer" useGeneratedKeys="true" keyProperty="producer.id" keyColumn="id">
+        insert into producer (idProducer, name, address, city, zipCode, phone, timestampFrom, timestampTo)
+         values (#{producer.idProducer}, #{producer.name}, #{producer.address}, #{producer.city}, #{producer.zipCode}, #{producer.phone}, #{producer.timestampFrom}, #{producer.timestampTo});
+    </insert>
+
+    <update id="updateProducer">
+        update producer
+        set
+          idProducer = #{producer.idProducer},
+          name = #{producer.name},
+          address = #{producer.address},
+          city = #{producer.city},
+          zipCode = #{producer.zipCode},
+          phone = #{producer.phone},
+          timestampFrom = #{producer.timestampFrom},
+          timestampTo = #{producer.timestampTo}
+        where id = #{producer.id};
+    </update>
+
+    <insert id="insertProduct" useGeneratedKeys="true" keyProperty="product.id" keyColumn="id">
+        insert into product (idProduct, idBrand, name, category, type, price, idTypePrice, quantity, description, timestampFrom, timestampTo)
+         values (#{product.idProduct}, #{product.idBrand}, #{product.name}, #{product.category}, #{product.type}, #{product.price}, #{product.idTypePrice}, #{product.quantity}, #{product.description}, #{product.timestampFrom}, #{product.timestampTo});
+    </insert>
+
+    <update id="updateProduct">
+        update product
+        set
+          idProduct = #{product.idProduct},
+          idBrand = #{product.idBrand},
+          name = #{product.name},
+          category = #{product.category},
+          type = #{product.type},
+          price = #{product.price},
+          idTypePrice = #{product.idTypePrice},
+          quantity = #{product.quantity},
+          description = #{product.description},
+          timestampFrom = #{product.timestampFrom},
+          timestampTo = #{product.timestampTo}
+        where id = #{product.id};
+    </update>
+
+    <insert id="insertProvider" useGeneratedKeys="true" keyProperty="provider.id" keyColumn="id">
+        insert into provider (idProvider, idCountry, name, address, city, zipCode, phone, timestampFrom, timestampTo)
+         values (#{provider.idProvider}, #{provider.idCountry}, #{provider.name}, #{provider.address}, #{provider.city}, #{provider.zipCode}, #{provider.phone}, #{provider.timestampFrom}, #{provider.timestampTo});
+    </insert>
+
+    <update id="updateProvider">
+        update provider
+        set
+          idProvider = #{provider.idProvider},
+          idCountry = #{provider.idCountry},
+          name = #{provider.name},
+          address = #{provider.address},
+          city = #{provider.city},
+          zipCode = #{provider.zipCode},
+          phone = #{provider.phone},
+          timestampFrom = #{provider.timestampFrom},
+          timestampTo = #{provider.timestampTo}
+        where id = #{provider.id};
+    </update>
+
+    <insert id="insertTypePrice" useGeneratedKeys="true" keyProperty="typePrice.id" keyColumn="id">
+        insert into typePrice (idTypePrice, name, timestampFrom, timestampTo)
+         values (#{typePrice.idTypePrice}, #{typePrice.name}, #{typePrice.timestampFrom}, #{typePrice.timestampTo});
+    </insert>
+
+    <update id="updateTypePrice">
+        update typePrice
+        set
+          idTypePrice = #{typePrice.idTypePrice},
+          name = #{typePrice.name},
+          timestampFrom = #{typePrice.timestampFrom},
+          timestampTo = #{typePrice.timestampTo}
+        where id = #{typePrice.id};
+    </update>
+
+    <insert id="insertLocality" useGeneratedKeys="true" keyProperty="locality.id" keyColumn="id">
+        insert into locality (idLocality, idRegion, name, timestampFrom, timestampTo)
+         values (#{locality.idLocality}, #{locality.idRegion}, #{locality.name}, #{locality.timestampFrom}, #{locality.timestampTo});
+    </insert>
+
+    <update id="updateLocality">
+        update locality
+        set
+          idLocality = #{locality.idLocality},
+          idRegion = #{locality.idRegion},
+          name = #{locality.name},
+          timestampFrom = #{locality.timestampFrom},
+          timestampTo = #{locality.timestampTo}
+        where id = #{locality.id};
+    </update>
+
+    <insert id="insertRegion" useGeneratedKeys="true" keyProperty="region.id" keyColumn="id">
+        insert into region (idRegion, name, country, timestampFrom, timestampTo)
+         values (#{region.idRegion}, #{region.name}, #{region.country}, #{region.timestampFrom}, #{region.timestampTo});
+    </insert>
+
+    <update id="updateRegion">
+        update region
+        set
+          idRegion = #{region.idRegion},
+          name = #{region.name},
+          country = #{region.country},
+          timestampFrom = #{region.timestampFrom},
+          timestampTo = #{region.timestampTo}
+        where id = #{region.id};
+    </update>
+
+    <insert id="insertShop" useGeneratedKeys="true" keyProperty="shop.id" keyColumn="id">
+        insert into shop (idShop, idLocality, name, phone, address, zipCode, timestampFrom, timestampTo)
+         values (#{shop.idShop}, #{shop.idLocality}, #{shop.name}, #{shop.phone}, #{shop.address}, #{shop.zipCode}, #{shop.timestampFrom}, #{shop.timestampTo});
+    </insert>
+
+    <update id="updateShop">
+        update shop
+        set
+          idShop = #{shop.idShop},
+          idLocality = #{shop.idLocality},
+          name = #{shop.name},
+          phone = #{shop.phone},
+          address = #{shop.address},
+          zipCode = #{shop.zipCode},
+          timestampFrom = #{shop.timestampFrom},
+          timestampTo = #{shop.timestampTo}
+        where id = #{shop.id};
+    </update>
+
+    <insert id="insertTypeWorker" useGeneratedKeys="true" keyProperty="typeWorker.id" keyColumn="id">
+        insert into typeWorker (idTypeWorker, name, timestampFrom, timestampTo)
+         values (#{typeWorker.idTypeWorker}, #{typeWorker.name}, #{typeWorker.timestampFrom}, #{typeWorker.timestampTo});
+    </insert>
+
+    <update id="updateTypeWorker">
+        update typeWorker
+        set
+          idTypeWorker = #{typeWorker.idTypeWorker},
+          name = #{typeWorker.name},
+          timestampFrom = #{typeWorker.timestampFrom},
+          timestampTo = #{typeWorker.timestampTo}
+        where id = #{typeWorker.id};
+    </update>
+
+    <insert id="insertWorker" useGeneratedKeys="true" keyProperty="worker.id" keyColumn="id">
+        insert into worker (idWorker, firstName, lastName, idTypeWorker, pesel, phone, address, city, zipCode, timestampFrom, timestampTo)
+         values (#{worker.idWorker}, #{worker.firstName}, #{worker.lastName}, #{worker.idTypeWorker}, #{worker.pesel}, #{worker.phone}, #{worker.address}, #{worker.city}, #{worker.zipCode}, #{worker.timestampFrom}, #{worker.timestampTo});
+    </insert>
+
+    <update id="updateWorker">
+        update worker
+        set
+          idWorker = #{worker.idWorker},
+          firstName = #{worker.firstName},
+          lastName = #{worker.lastName},
+          idTypeWorker = #{worker.idTypeWorker},
+          pesel = #{worker.pesel},
+          phone = #{worker.phone},
+          address = #{worker.address},
+          city = #{worker.city},
+          zipCode = #{worker.zipCode},
+          timestampFrom = #{worker.timestampFrom},
+          timestampTo = #{worker.timestampTo}
+        where id = #{worker.id};
+    </update>
+
+    <insert id="insertSourceToStageIdMap" useGeneratedKeys="true" keyProperty="sourceToStageIdMap.id" keyColumn="id">
+        insert into sourceToStageIdMap (idSource, sourceTableName, idStage, stageTableName)
+         values (#{sourceToStageIdMap.idSource}, #{sourceToStageIdMap.sourceTableName}, #{sourceToStageIdMap.idStage}, #{sourceToStageIdMap.stageTableName});
+    </insert>
+
+    <select id="selectSourceToStageIdMap" resultType="com.tkurek.wat.Etl.model.stage.SourceToStageIdMap">
+        select * from sourceToStageIdMap
+        where idSource = #{idSource} and sourceTableName = #{sourceTableName};
+    </select>
+    
+    <delete id="deleteSourceToStageIdMap">
+        delete from sourceToStageIdMap
+        where idSource = #{sourceToStageIdMap.idSource} and sourceTableName = #{sourceToStageIdMap.sourceTableName};
+    </delete>
+
+</mapper>

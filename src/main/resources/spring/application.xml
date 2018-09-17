@@ -4,12 +4,102 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+    <!-- Activation converting String to Collection types -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"/>
+
     <import resource="classpath*:spring/sourceOne.xml"/>
     <import resource="classpath*:spring/sourceTwo.xml"/>
+    <import resource="classpath*:spring/stage.xml"/>
+    <import resource="classpath*:spring/metadata.xml"/>
+    <import resource="classpath*:spring/warehouse.xml"/>
 
-    <!--<bean id="app" class="com.tkurek.wat.Etl.controller.EtlController">-->
-        <!--<property name="sourceOneMapper" ref="sourceOneMapper"/>-->
-        <!--<property name="sourceTwoMapper" ref="sourceTwoMapper"/>-->
-    <!--</bean>-->
+    <bean id="sourceOneBrandExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceOneBrandExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceOneMapper" ref="sourceOneMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceOneCountryExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceOneCountryExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceOneMapper" ref="sourceOneMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceOneProducerExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceOneProducerExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceOneMapper" ref="sourceOneMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceOneProductExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceOneProductExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceOneMapper" ref="sourceOneMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceOneProviderExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceOneProviderExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceOneMapper" ref="sourceOneMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceOneTypePriceExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceOneTypePriceExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceOneMapper" ref="sourceOneMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceTwoLocalityExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceTwoLocalityExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceTwoMapper" ref="sourceTwoMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceTwoRegionExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceTwoRegionExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceTwoMapper" ref="sourceTwoMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceTwoShopExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceTwoShopExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceTwoMapper" ref="sourceTwoMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceTwoTypeWorkerExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceTwoTypeWorkerExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceTwoMapper" ref="sourceTwoMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceTwoWorkerExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceTwoWorkerExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="sourceTwoMapper" ref="sourceTwoMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+
+    <bean id="logService" class="com.tkurek.wat.Etl.service.impl.LogServiceImpl">
+        <property name="metadataMapper" ref="metadataMapper"/>
+    </bean>
+
+    <bean id="utilService" class="com.tkurek.wat.Etl.service.impl.UtilServiceImpl">
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+
+    <bean id="extractService" class="com.tkurek.wat.Etl.service.impl.ExtractServiceImpl">
+        <property name="sourceOneBrandExtractor" ref="sourceOneBrandExtractor"/>
+        <property name="sourceOneCountryExtractor" ref="sourceOneCountryExtractor"/>
+        <property name="sourceOneProducerExtractor" ref="sourceOneProducerExtractor"/>
+        <property name="sourceOneProductExtractor" ref="sourceOneProductExtractor"/>
+        <property name="sourceOneProviderExtractor" ref="sourceOneProviderExtractor"/>
+        <property name="sourceOneTypePriceExtractor" ref="sourceOneTypePriceExtractor"/>
+        <property name="sourceTwoLocalityExtractor" ref="sourceTwoLocalityExtractor"/>
+        <property name="sourceTwoRegionExtractor" ref="sourceTwoRegionExtractor"/>
+        <property name="sourceTwoShopExtractor" ref="sourceTwoShopExtractor"/>
+        <property name="sourceTwoTypeWorkerExtractor" ref="sourceTwoTypeWorkerExtractor"/>
+        <property name="sourceTwoWorkerExtractor" ref="sourceTwoWorkerExtractor"/>
+    </bean>
 
 </beans>

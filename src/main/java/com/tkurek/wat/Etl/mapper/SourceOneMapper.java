@@ -1,9 +1,16 @@
 package com.tkurek.wat.Etl.mapper;
 
-import org.apache.ibatis.annotations.Param;
+import com.tkurek.wat.Etl.model.sourceOne.*;
+
+import java.util.Collection;
 
 public interface SourceOneMapper {
 
-    String testSelect(@Param("id") Long id);
+    Collection<SourceOne_Brand> selectAllBrand();
+    Collection<SourceOne_Country> selectAllCountry();
+    Collection<SourceOne_Producer> selectAllProducer();
+    Collection<SourceOne_Product> selectAllProduct();
+    Collection<SourceOne_Provider> selectAllProvider();
+    Collection<SourceOne_TypePrice> selectAllTypePrice();
 
 }

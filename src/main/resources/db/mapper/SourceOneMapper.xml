@@ -5,10 +5,28 @@
 
 <mapper namespace="com.tkurek.wat.Etl.mapper.SourceOneMapper">
 
-    <select id="testSelect" resultType="java.lang.String" parameterType="long">
-        select p.name
-        from product as p
-        where p.idProduct = #{id}
+    <select id="selectAllBrand" resultType="com.tkurek.wat.Etl.model.sourceOne.SourceOne_Brand">
+        select * from brand;
+    </select>
+
+    <select id="selectAllCountry" resultType="com.tkurek.wat.Etl.model.sourceOne.SourceOne_Country">
+        select * from country;
+    </select>
+
+    <select id="selectAllProducer" resultType="com.tkurek.wat.Etl.model.sourceOne.SourceOne_Producer">
+        select * from producer;
+    </select>
+
+    <select id="selectAllProduct" resultType="com.tkurek.wat.Etl.model.sourceOne.SourceOne_Product">
+        select * from product;
+    </select>
+
+    <select id="selectAllProvider" resultType="com.tkurek.wat.Etl.model.sourceOne.SourceOne_Provider">
+        select * from provider;
+    </select>
+
+    <select id="selectAllTypePrice" resultType="com.tkurek.wat.Etl.model.sourceOne.SourceOne_TypePrice">
+        select * from typePrice;
     </select>
 
 </mapper>

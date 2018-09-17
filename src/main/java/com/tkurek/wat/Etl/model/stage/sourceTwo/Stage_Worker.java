@@ -1,7 +1,10 @@
-package com.tkurek.wat.Etl.model.sourceTwo;
+package com.tkurek.wat.Etl.model.stage.sourceTwo;
 
-public class SourceTwo_Worker {
+import java.sql.Timestamp;
 
+public class Stage_Worker {
+
+    private Long id;
     private Long idWorker;
     private String firstName;
     private String lastName;
@@ -11,6 +14,16 @@ public class SourceTwo_Worker {
     private String address;
     private String city;
     private String zipCode;
+    private Timestamp timestampFrom;
+    private Timestamp timestampTo;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getIdWorker() {
         return idWorker;
@@ -82,5 +95,21 @@ public class SourceTwo_Worker {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public Timestamp getTimestampFrom() {
+        return timestampFrom;
+    }
+
+    public void setTimestampFrom(Timestamp timestampFrom) {
+        this.timestampFrom = timestampFrom;
+    }
+
+    public Timestamp getTimestampTo() {
+        return timestampTo;
+    }
+
+    public void setTimestampTo(Timestamp timestampTo) {
+        this.timestampTo = timestampTo;
     }
 }

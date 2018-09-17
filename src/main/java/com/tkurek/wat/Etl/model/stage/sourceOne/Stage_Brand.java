@@ -1,11 +1,24 @@
-package com.tkurek.wat.Etl.model.sourceOne;
+package com.tkurek.wat.Etl.model.stage.sourceOne;
 
-public class SourceOne_Brand {
+import java.sql.Timestamp;
 
+public class Stage_Brand {
+
+    private Long id;
     private Long idBrand;
     private Long idProducer;
     private String name;
     private String subBrand;
+    private Timestamp timestampFrom;
+    private Timestamp timestampTo;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getIdBrand() {
         return idBrand;
@@ -39,13 +52,19 @@ public class SourceOne_Brand {
         this.subBrand = subBrand;
     }
 
-    @Override
-    public String toString() {
-        return "SourceOne_Brand{" +
-                "idBrand=" + idBrand +
-                ", idProducer=" + idProducer +
-                ", name='" + name + '\'' +
-                ", subBrand='" + subBrand + '\'' +
-                '}';
+    public Timestamp getTimestampFrom() {
+        return timestampFrom;
+    }
+
+    public void setTimestampFrom(Timestamp timestampFrom) {
+        this.timestampFrom = timestampFrom;
+    }
+
+    public Timestamp getTimestampTo() {
+        return timestampTo;
+    }
+
+    public void setTimestampTo(Timestamp timestampTo) {
+        this.timestampTo = timestampTo;
     }
 }

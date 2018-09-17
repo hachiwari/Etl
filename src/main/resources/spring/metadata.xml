@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean name="dataMetadata" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="${spring.datasource.metadata.url}" />
+        <property name="username" value="${spring.datasource.metadata.username}" />
+        <property name="password" value="${spring.datasource.metadata.password}" />
+        <property name="driverClassName" value="${spring.datasource.metadata.driver-class-name}" />
+    </bean>
+
+    <!-- MyBatis -->
+    <bean id="metadataSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataMetadata" />
+        <property name="mapperLocations" value="classpath*:db/mapper/MetadataMapper.xml" />
+    </bean>
+
+    <bean id="metadataMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.tkurek.wat.Etl.mapper.MetadataMapper" />
+        <property name="sqlSessionFactory" ref="metadataSessionFactory" />
+    </bean>
+
+    <!-- Liquibase -->
+    <bean id="metadataLiquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataMetadata" />
+        <property name="changeLog" value="classpath*:db/changelog/metadata/*.xml" />
+    </bean>
+
+</beans>
