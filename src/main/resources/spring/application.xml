@@ -13,6 +13,7 @@
     <import resource="classpath*:spring/metadata.xml"/>
     <import resource="classpath*:spring/warehouse.xml"/>
 
+    <!-- Extractors -->
     <bean id="sourceOneBrandExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceOneBrandExtractor">
         <property name="logService" ref="logService"/>
         <property name="utilService" ref="utilService"/>
@@ -79,6 +80,83 @@
         <property name="sourceTwoMapper" ref="sourceTwoMapper"/>
         <property name="stageMapper" ref="stageMapper"/>
     </bean>
+    <bean id="sourceDeliveryExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceDeliveryExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="sourceSaleExtractor" class="com.tkurek.wat.Etl.utils.extractor.SourceSaleExtractor">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+
+    <!-- Transformers -->
+    <bean id="brandTransformer" class="com.tkurek.wat.Etl.utils.transformer.BrandTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="countryTransformer" class="com.tkurek.wat.Etl.utils.transformer.CountryTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="producerTransformer" class="com.tkurek.wat.Etl.utils.transformer.ProducerTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="providerTransformer" class="com.tkurek.wat.Etl.utils.transformer.ProviderTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="typePriceTransformer" class="com.tkurek.wat.Etl.utils.transformer.TypePriceTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="productTransformer" class="com.tkurek.wat.Etl.utils.transformer.ProductTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+    <bean id="localityTransformer" class="com.tkurek.wat.Etl.utils.transformer.LocalityTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+   <bean id="regionTransformer" class="com.tkurek.wat.Etl.utils.transformer.RegionTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+   <bean id="shopTransformer" class="com.tkurek.wat.Etl.utils.transformer.ShopTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+   <bean id="typeWorkerTransformer" class="com.tkurek.wat.Etl.utils.transformer.TypeWorkerTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+   <bean id="workerTransformer" class="com.tkurek.wat.Etl.utils.transformer.WorkerTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+   <bean id="deliveryTransformer" class="com.tkurek.wat.Etl.utils.transformer.DeliveryTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
+   <bean id="saleTransformer" class="com.tkurek.wat.Etl.utils.transformer.SaleTransformer">
+        <property name="logService" ref="logService"/>
+        <property name="utilService" ref="utilService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+    </bean>
 
     <bean id="logService" class="com.tkurek.wat.Etl.service.impl.LogServiceImpl">
         <property name="metadataMapper" ref="metadataMapper"/>
@@ -89,6 +167,7 @@
     </bean>
 
     <bean id="extractService" class="com.tkurek.wat.Etl.service.impl.ExtractServiceImpl">
+        <property name="utilService" ref="utilService"/>
         <property name="sourceOneBrandExtractor" ref="sourceOneBrandExtractor"/>
         <property name="sourceOneCountryExtractor" ref="sourceOneCountryExtractor"/>
         <property name="sourceOneProducerExtractor" ref="sourceOneProducerExtractor"/>
@@ -100,6 +179,23 @@
         <property name="sourceTwoShopExtractor" ref="sourceTwoShopExtractor"/>
         <property name="sourceTwoTypeWorkerExtractor" ref="sourceTwoTypeWorkerExtractor"/>
         <property name="sourceTwoWorkerExtractor" ref="sourceTwoWorkerExtractor"/>
+        <property name="sourceDeliveryExtractor" ref="sourceDeliveryExtractor"/>
+        <property name="sourceSaleExtractor" ref="sourceSaleExtractor"/>
     </bean>
 
+    <bean id="transformService" class="com.tkurek.wat.Etl.service.impl.TransformServiceImpl">
+        <property name="brandTransformer" ref="brandTransformer"/>
+        <property name="countryTransformer" ref="countryTransformer"/>
+        <property name="producerTransformer" ref="producerTransformer"/>
+        <property name="providerTransformer" ref="providerTransformer"/>
+        <property name="typePriceTransformer" ref="typePriceTransformer"/>
+        <property name="productTransformer" ref="productTransformer"/>
+        <property name="localityTransformer" ref="localityTransformer"/>
+        <property name="regionTransformer" ref="regionTransformer"/>
+        <property name="shopTransformer" ref="shopTransformer"/>
+        <property name="typeWorkerTransformer" ref="typeWorkerTransformer"/>
+        <property name="workerTransformer" ref="workerTransformer"/>
+        <property name="deliveryTransformer" ref="deliveryTransformer"/>
+        <property name="saleTransformer" ref="saleTransformer"/>
+    </bean>
 </beans>

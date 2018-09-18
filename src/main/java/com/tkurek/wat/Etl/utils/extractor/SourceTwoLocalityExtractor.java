@@ -6,7 +6,6 @@ import com.tkurek.wat.Etl.model.sourceTwo.SourceTwo_Locality;
 import com.tkurek.wat.Etl.model.stage.sourceTwo.Stage_Locality;
 import com.tkurek.wat.Etl.service.LogService;
 import com.tkurek.wat.Etl.service.UtilService;
-import com.tkurek.wat.Etl.service.impl.ExtractServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class SourceTwoLocalityExtractor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ExtractServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SourceTwoLocalityExtractor.class);
 
     private LogService logService;
     private UtilService utilService;

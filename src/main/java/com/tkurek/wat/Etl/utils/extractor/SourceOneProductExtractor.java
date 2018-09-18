@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class SourceOneProductExtractor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ExtractServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SourceOneProductExtractor.class);
 
     private LogService logService;
     private UtilService utilService;
@@ -74,6 +74,7 @@ public class SourceOneProductExtractor {
         newObject.setIdProduct(object.getIdProduct());
         newObject.setIdBrand(object.getIdBrand());
         newObject.setName(object.getName());
+        newObject.setCode(object.getCode());
         newObject.setCategory(object.getCategory());
         newObject.setType(object.getType());
         newObject.setPrice(object.getPrice());
@@ -93,6 +94,9 @@ public class SourceOneProductExtractor {
             return false;
         }
         if (!sourceObject.getName().equals(stageObject.getName())) {
+            return false;
+        }
+        if (!sourceObject.getCode().equals(stageObject.getCode())) {
             return false;
         }
         if (!sourceObject.getCategory().equals(stageObject.getCategory())) {

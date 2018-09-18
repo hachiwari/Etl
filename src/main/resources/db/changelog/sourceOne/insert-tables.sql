@@ -34,8 +34,8 @@ insert into typePrice values (6, 'SEK');
 -- rollback delete table typePrice;
 
 -- changeset tkurek:insert-product
-insert into product values (1, 1, 'Rurki z kremem', 'Słodycze', 'Jedzenie', 2.79, 1, 1, 'Super rurki z kremem');
-insert into product values (2, 1, 'Kubuś', 'Słodkie napoje', 'Woda', 1.99, 2, 1, 'Kubuś słodki kubuś zdrowy!');
-insert into product values (3, 2, 'ChupaChups', 'Słodycze', 'Jedzenie', 0.79, 1, 1, 'Lizaczek');
-insert into product values (4, 2, 'Marchewka', 'Warzywo', 'Jedzenie', 0.55, 4, 3, 'Marchewa');
+insert into product values (1, 1, 'Rurki z kremem', 'P000001', 'Słodycze', 'Jedzenie', 2.79, 1, 1, 'Super rurki z kremem');
+insert into product values (2, 1, 'Kubuś', 'P000002', 'Słodkie napoje', 'Woda', 1.99, 2, 1, 'Kubuś słodki kubuś zdrowy!');
+insert into product values (3, 2, 'ChupaChups', 'P000003', 'Słodycze', 'Jedzenie', 0.79, 1, 1, 'Lizaczek');
+insert into product values (4, 2, 'Marchewka', 'P000004', 'Warzywo', 'Jedzenie', 0.55, 4, 3, 'Marchewa');
 -- rollback delete table product;

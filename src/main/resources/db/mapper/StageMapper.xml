@@ -49,6 +49,14 @@
         select * from worker;
     </select>
 
+    <select id="selectAllDelivery" resultType="com.tkurek.wat.Etl.model.stage.Stage_Delivery">
+        select * from delivery;
+    </select>
+
+    <select id="selectAllSale" resultType="com.tkurek.wat.Etl.model.stage.Stage_Sale">
+        select * from sale;
+    </select>
+
     <insert id="insertBrand" useGeneratedKeys="true" keyProperty="brand.id" keyColumn="id">
         insert into brand (idBrand, idProducer, name, subBrand, timestampFrom, timestampTo)
          values (#{brand.idBrand}, #{brand.idProducer}, #{brand.name}, #{brand.subBrand}, #{brand.timestampFrom}, #{brand.timestampTo});
@@ -102,8 +110,8 @@
     </update>
 
     <insert id="insertProduct" useGeneratedKeys="true" keyProperty="product.id" keyColumn="id">
-        insert into product (idProduct, idBrand, name, category, type, price, idTypePrice, quantity, description, timestampFrom, timestampTo)
-         values (#{product.idProduct}, #{product.idBrand}, #{product.name}, #{product.category}, #{product.type}, #{product.price}, #{product.idTypePrice}, #{product.quantity}, #{product.description}, #{product.timestampFrom}, #{product.timestampTo});
+        insert into product (idProduct, idBrand, name, code, category, type, price, idTypePrice, quantity, description, timestampFrom, timestampTo)
+         values (#{product.idProduct}, #{product.idBrand}, #{product.name}, #{product.code}, #{product.category}, #{product.type}, #{product.price}, #{product.idTypePrice}, #{product.quantity}, #{product.description}, #{product.timestampFrom}, #{product.timestampTo});
     </insert>
 
     <update id="updateProduct">
@@ -112,6 +120,7 @@
           idProduct = #{product.idProduct},
           idBrand = #{product.idBrand},
           name = #{product.name},
+          code = #{product.code},
           category = #{product.category},
           type = #{product.type},
           price = #{product.price},
@@ -246,6 +255,40 @@
         where id = #{worker.id};
     </update>
 
+    <insert id="insertDelivery" useGeneratedKeys="true" keyProperty="delivery.id" keyColumn="id">
+        insert into delivery (idDelivery, nameProvider, codeProduct, quantityProduct, timestampFrom, timestampTo)
+         values (#{delivery.idDelivery}, #{delivery.nameProvider}, #{delivery.codeProduct}, #{delivery.quantityProduct}, #{delivery.timestampFrom}, #{delivery.timestampTo});
+    </insert>
+
+    <update id="updateDelivery">
+        update delivery
+        set
+          idDelivery = #{delivery.idDelivery},
+          nameProvider = #{delivery.nameProvider},
+          codeProduct = #{delivery.codeProduct},
+          quantityProduct = #{delivery.quantityProduct},
+          timestampFrom = #{delivery.timestampFrom},
+          timestampTo = #{delivery.timestampTo}
+        where id = #{delivery.id};
+    </update>
+
+    <insert id="insertSale" useGeneratedKeys="true" keyProperty="sale.id" keyColumn="id">
+        insert into sale (idSale, codeProduct, nameShop, quantityProduct, timestampFrom, timestampTo)
+         values (#{sale.idSale}, #{sale.codeProduct}, #{sale.nameShop}, #{sale.quantityProduct}, #{sale.timestampFrom}, #{sale.timestampTo});
+    </insert>
+
+    <update id="updateSale">
+        update sale
+        set
+          idSale = #{sale.idSale},
+          codeProduct = #{sale.codeProduct},
+          nameShop = #{sale.nameShop},
+          quantityProduct = #{sale.quantityProduct},
+          timestampFrom = #{sale.timestampFrom},
+          timestampTo = #{sale.timestampTo}
+        where id = #{sale.id};
+    </update>
+
     <insert id="insertSourceToStageIdMap" useGeneratedKeys="true" keyProperty="sourceToStageIdMap.id" keyColumn="id">
         insert into sourceToStageIdMap (idSource, sourceTableName, idStage, stageTableName)
          values (#{sourceToStageIdMap.idSource}, #{sourceToStageIdMap.sourceTableName}, #{sourceToStageIdMap.idStage}, #{sourceToStageIdMap.stageTableName});
@@ -260,5 +303,331 @@
         delete from sourceToStageIdMap
         where idSource = #{sourceToStageIdMap.idSource} and sourceTableName = #{sourceToStageIdMap.sourceTableName};
     </delete>
+
+    <insert id="insertStageToWarehouseIdMap" useGeneratedKeys="true" keyProperty="stageToWarehouseIdMap.id" keyColumn="id">
+        insert into stageToWarehouseIdMap (idStage, stageTableName, idWarehouse, warehouseTableName)
+         values (#{stageToWarehouseIdMap.idStage}, #{stageToWarehouseIdMap.stageTableName}, #{stageToWarehouseIdMap.idWarehouse}, #{stageToWarehouseIdMap.warehouseTableName});
+    </insert>
+
+    <select id="selectStageToWarehouseIdMap" resultType="com.tkurek.wat.Etl.model.stage.StageToWarehouseIdMap">
+        select * from stageToWarehouseIdMap
+        where idStage = #{idStage} and stageTableName = #{stageTableName};
+    </select>
+
+    <insert id="insertTmpBrand" useGeneratedKeys="true" keyProperty="brand.id" keyColumn="id">
+        insert into tmpWBrand (idBrand, idProducer, name, subBrand, timestampFrom, timestampTo)
+         values (#{brand.idBrand}, #{brand.idProducer}, #{brand.name}, #{brand.subBrand}, #{brand.timestampFrom}, #{brand.timestampTo});
+    </insert>
+
+    <update id="updateTmpBrand">
+        update tmpWBrand
+        set
+          idBrand = #{brand.idBrand},
+          idProducer = #{brand.idProducer},
+          name = #{brand.name},
+          subBrand = #{brand.subBrand},
+          timestampFrom = #{brand.timestampFrom},
+          timestampTo = #{brand.timestampTo}
+        where id = #{brand.id};
+    </update>
+
+    <select id="selectLastTmpBrand" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Brand">
+        select * from tmpWBrand
+        where idBrand = #{idBrand} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpCountry" useGeneratedKeys="true" keyProperty="country.id" keyColumn="id">
+        insert into tmpWCountry (idCountry, name, code, timestampFrom, timestampTo)
+         values (#{country.idCountry}, #{country.name}, #{country.code}, #{country.timestampFrom}, #{country.timestampTo});
+    </insert>
+
+    <update id="updateTmpCountry">
+        update tmpWCountry
+        set
+          idCountry = #{country.idCountry},
+          name = #{country.name},
+          code = #{country.code},
+          timestampFrom = #{country.timestampFrom},
+          timestampTo = #{country.timestampTo}
+        where id = #{country.id};
+    </update>
+
+    <select id="selectLastTmpCountry" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Country">
+        select * from tmpWCountry
+        where idCountry = #{idCountry} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpProducer" useGeneratedKeys="true" keyProperty="producer.id" keyColumn="id">
+        insert into tmpWProducer (idProducer, name, address, city, zipCode, phone, timestampFrom, timestampTo)
+         values (#{producer.idProducer}, #{producer.name}, #{producer.address}, #{producer.city}, #{producer.zipCode}, #{producer.phone}, #{producer.timestampFrom}, #{producer.timestampTo});
+    </insert>
+
+    <update id="updateTmpProducer">
+        update tmpWProducer
+        set
+          idProducer = #{producer.idProducer},
+          name = #{producer.name},
+          address = #{producer.address},
+          city = #{producer.city},
+          zipCode = #{producer.zipCode},
+          phone = #{producer.phone},
+          timestampFrom = #{producer.timestampFrom},
+          timestampTo = #{producer.timestampTo}
+        where id = #{producer.id};
+    </update>
+
+    <select id="selectLastTmpProducer" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Producer">
+        select * from tmpWProducer
+        where idProducer = #{idProducer} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpProvider" useGeneratedKeys="true" keyProperty="provider.id" keyColumn="id">
+        insert into tmpWProvider (idProvider, idCountry, name, address, city, zipCode, phone, timestampFrom, timestampTo)
+         values (#{provider.idProvider}, #{provider.idCountry}, #{provider.name}, #{provider.address}, #{provider.city}, #{provider.zipCode}, #{provider.phone}, #{provider.timestampFrom}, #{provider.timestampTo});
+    </insert>
+
+    <update id="updateTmpProvider">
+        update tmpWProvider
+        set
+          idProvider = #{provider.idProvider},
+          idCountry = #{provider.idCountry},
+          name = #{provider.name},
+          address = #{provider.address},
+          city = #{provider.city},
+          zipCode = #{provider.zipCode},
+          phone = #{provider.phone},
+          timestampFrom = #{provider.timestampFrom},
+          timestampTo = #{provider.timestampTo}
+        where id = #{provider.id};
+    </update>
+
+    <select id="selectLastTmpProvider" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Provider">
+        select * from tmpWProvider
+        where idProvider = #{idProvider} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpTypePrice" useGeneratedKeys="true" keyProperty="typePrice.id" keyColumn="id">
+        insert into tmpWTypePrice (idTypePrice, name, timestampFrom, timestampTo)
+         values (#{typePrice.idTypePrice}, #{typePrice.name}, #{typePrice.timestampFrom}, #{typePrice.timestampTo});
+    </insert>
+
+    <update id="updateTmpTypePrice">
+        update tmpWTypePrice
+        set
+          idTypePrice = #{typePrice.idTypePrice},
+          name = #{typePrice.name},
+          timestampFrom = #{typePrice.timestampFrom},
+          timestampTo = #{typePrice.timestampTo}
+        where id = #{typePrice.id};
+    </update>
+
+    <select id="selectLastTmpTypePrice" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_TypePrice">
+        select * from tmpWTypePrice
+        where idTypePrice = #{idTypePrice} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpProduct" useGeneratedKeys="true" keyProperty="product.id" keyColumn="id">
+        insert into tmpWProduct (idProduct, idBrand, name, code, category, type, price, idTypePrice, quantity, description, timestampFrom, timestampTo)
+         values (#{product.idProduct}, #{product.idBrand}, #{product.name}, #{product.code}, #{product.category}, #{product.type}, #{product.price}, #{product.idTypePrice}, #{product.quantity}, #{product.description}, #{product.timestampFrom}, #{product.timestampTo});
+    </insert>
+
+    <update id="updateTmpProduct">
+        update tmpWProduct
+        set
+          idProduct = #{product.idProduct},
+          idBrand = #{product.idBrand},
+          name = #{product.name},
+          code = #{product.code},
+          category = #{product.category},
+          type = #{product.type},
+          price = #{product.price},
+          idTypePrice = #{product.idTypePrice},
+          quantity = #{product.quantity},
+          description = #{product.description},
+          timestampFrom = #{product.timestampFrom},
+          timestampTo = #{product.timestampTo}
+        where id = #{product.id};
+    </update>
+
+    <select id="selectLastTmpProduct" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Product">
+        select * from tmpWProduct
+        where idProduct = #{idProduct} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpLocality" useGeneratedKeys="true" keyProperty="locality.id" keyColumn="id">
+        insert into tmpWLocality (idLocality, idRegion, name, timestampFrom, timestampTo)
+         values (#{locality.idLocality}, #{locality.idRegion}, #{locality.name}, #{locality.timestampFrom}, #{locality.timestampTo});
+    </insert>
+
+    <update id="updateTmpLocality">
+        update tmpWLocality
+        set
+          idLocality = #{locality.idLocality},
+          idRegion = #{locality.idRegion},
+          name = #{locality.name},
+          timestampFrom = #{locality.timestampFrom},
+          timestampTo = #{locality.timestampTo}
+        where id = #{locality.id};
+    </update>
+
+    <select id="selectLastTmpLocality" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Locality">
+        select * from tmpWLocality
+        where idLocality = #{idLocality} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpRegion" useGeneratedKeys="true" keyProperty="region.id" keyColumn="id">
+        insert into tmpWRegion (idRegion, name, country, timestampFrom, timestampTo)
+         values (#{region.idRegion}, #{region.name}, #{region.country}, #{region.timestampFrom}, #{region.timestampTo});
+    </insert>
+
+    <update id="updateTmpRegion">
+        update tmpWRegion
+        set
+          idRegion = #{region.idRegion},
+          name = #{region.name},
+          country = #{region.country},
+          timestampFrom = #{region.timestampFrom},
+          timestampTo = #{region.timestampTo}
+        where id = #{region.id};
+    </update>
+
+    <select id="selectLastTmpRegion" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Region">
+        select * from tmpWRegion
+        where idRegion = #{idRegion} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpShop" useGeneratedKeys="true" keyProperty="shop.id" keyColumn="id">
+        insert into tmpWShop (idShop, idLocality, name, phone, address, zipCode, timestampFrom, timestampTo)
+         values (#{shop.idShop}, #{shop.idLocality}, #{shop.name}, #{shop.phone}, #{shop.address}, #{shop.zipCode}, #{shop.timestampFrom}, #{shop.timestampTo});
+    </insert>
+
+    <update id="updateTmpShop">
+        update tmpWShop
+        set
+          idShop = #{shop.idShop},
+          idLocality = #{shop.idLocality},
+          name = #{shop.name},
+          phone = #{shop.phone},
+          address = #{shop.address},
+          zipCode = #{shop.zipCode},
+          timestampFrom = #{shop.timestampFrom},
+          timestampTo = #{shop.timestampTo}
+        where id = #{shop.id};
+    </update>
+
+    <select id="selectLastTmpShop" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Shop">
+        select * from tmpWShop
+        where idShop = #{idShop} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpTypeWorker" useGeneratedKeys="true" keyProperty="typeWorker.id" keyColumn="id">
+        insert into tmpWTypeWorker (idTypeWorker, name, timestampFrom, timestampTo)
+         values (#{typeWorker.idTypeWorker}, #{typeWorker.name}, #{typeWorker.timestampFrom}, #{typeWorker.timestampTo});
+    </insert>
+
+    <update id="updateTmpTypeWorker">
+        update tmpWTypeWorker
+        set
+          idTypeWorker = #{typeWorker.idTypeWorker},
+          name = #{typeWorker.name},
+          timestampFrom = #{typeWorker.timestampFrom},
+          timestampTo = #{typeWorker.timestampTo}
+        where id = #{typeWorker.id};
+    </update>
+
+    <select id="selectLastTmpTypeWorker" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_TypeWorker">
+        select * from tmpWTypeWorker
+        where idTypeWorker = #{idTypeWorker} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpWorker" useGeneratedKeys="true" keyProperty="worker.id" keyColumn="id">
+        insert into tmpWWorker (idWorker, firstName, lastName, idTypeWorker, pesel, phone, address, city, zipCode, timestampFrom, timestampTo)
+         values (#{worker.idWorker}, #{worker.firstName}, #{worker.lastName}, #{worker.idTypeWorker}, #{worker.pesel}, #{worker.phone}, #{worker.address}, #{worker.city}, #{worker.zipCode}, #{worker.timestampFrom}, #{worker.timestampTo});
+    </insert>
+
+    <update id="updateTmpWorker">
+        update tmpWWorker
+        set
+          idWorker = #{worker.idWorker},
+          firstName = #{worker.firstName},
+          lastName = #{worker.lastName},
+          idTypeWorker = #{worker.idTypeWorker},
+          pesel = #{worker.pesel},
+          phone = #{worker.phone},
+          address = #{worker.address},
+          city = #{worker.city},
+          zipCode = #{worker.zipCode},
+          timestampFrom = #{worker.timestampFrom},
+          timestampTo = #{worker.timestampTo}
+        where id = #{worker.id};
+    </update>
+
+    <select id="selectLastTmpWorker" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Worker">
+        select * from tmpWWorker
+        where idWorker = #{idWorker} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpDelivery" useGeneratedKeys="true" keyProperty="delivery.id" keyColumn="id">
+        insert into tmpFDelivery (idDelivery, idProvider, idProduct, quantityProduct, price, idTypePrice, timestampFrom, timestampTo)
+         values (#{delivery.idDelivery}, #{delivery.idProvider}, #{delivery.idProduct}, #{delivery.quantityProduct}, #{delivery.price}, #{delivery.idTypePrice}, #{delivery.timestampFrom}, #{delivery.timestampTo});
+    </insert>
+
+    <update id="updateTmpDelivery">
+        update tmpFDelivery
+        set
+          idDelivery = #{delivery.idDelivery},
+          idProvider = #{delivery.idProvider},
+          idProduct = #{delivery.idProduct},
+          quantityProduct = #{delivery.quantityProduct},
+          price = #{delivery.price},
+          idTypePrice = #{delivery.idTypePrice},
+          timestampFrom = #{delivery.timestampFrom},
+          timestampTo = #{delivery.timestampTo}
+        where id = #{delivery.id};
+    </update>
+
+    <select id="selectLastTmpDelivery" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_F_Delivery">
+        select * from tmpFDelivery
+        where idDelivery = #{idDelivery} and timestampTo is null;
+    </select>
+
+    <insert id="insertTmpSale" useGeneratedKeys="true" keyProperty="sale.id" keyColumn="id">
+        insert into tmpFSale (idSale, idProduct, idShop, quantityProduct, price, idTypePrice, timestampFrom, timestampTo)
+         values (#{sale.idSale}, #{sale.idProduct}, #{sale.idShop}, #{sale.quantityProduct}, #{sale.price}, #{sale.idTypePrice}, #{sale.timestampFrom}, #{sale.timestampTo});
+    </insert>
+
+    <update id="updateTmpSale">
+        update tmpFSale
+        set
+          idSale = #{sale.idSale},
+          idProduct = #{sale.idProduct},
+          idShop = #{sale.idShop},
+          quantityProduct = #{sale.quantityProduct},
+          price = #{sale.price},
+          idTypePrice = #{sale.idTypePrice},
+          timestampFrom = #{sale.timestampFrom},
+          timestampTo = #{sale.timestampTo}
+        where id = #{sale.id};
+    </update>
+
+    <select id="selectLastTmpSale" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_F_Sale">
+        select * from tmpFSale
+        where idSale = #{idSale} and timestampTo is null;
+    </select>
+
+    <select id="selectIdProviderByName" resultType="java.lang.Long">
+        select idProvider from tmpWProvider
+        where name = #{name} and timestampTo is null;
+    </select>
+
+    <select id="selectProductByCode" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Product">
+        select * from tmpWProduct
+        where code = #{code} and timestampTo is null;
+    </select>
+
+    <select id="selectIdShopByName" resultType="java.lang.Long">
+        select idShop from tmpWShop
+        where name = #{name} and timestampTo is null;
+    </select>
 
 </mapper>

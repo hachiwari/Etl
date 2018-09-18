@@ -59,6 +59,7 @@ create table product (
   idProduct   integer,
   idBrand     integer,
   name        character varying(255),
+  code        character varying(255),
   category    character varying(255),
   type        character varying(255),
   price       decimal(10, 2),

@@ -6,7 +6,6 @@ import com.tkurek.wat.Etl.model.sourceOne.SourceOne_Brand;
 import com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Brand;
 import com.tkurek.wat.Etl.service.LogService;
 import com.tkurek.wat.Etl.service.UtilService;
-import com.tkurek.wat.Etl.service.impl.ExtractServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class SourceOneBrandExtractor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ExtractServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SourceOneBrandExtractor.class);
 
     private LogService logService;
     private UtilService utilService;

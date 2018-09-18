@@ -18,6 +18,13 @@ public class LogServiceImpl implements LogService {
         this.metadataMapper.insertLogImporter(logImport);
     }
 
+    @Override
+    public Timestamp getLastImportToStage(String className) {
+        Timestamp logImport = this.metadataMapper.findLastTimestampForTable(className);
+        return (logImport == null) ? new Timestamp(0) : logImport;
+
+    }
+
     public void setMetadataMapper(MetadataMapper metadataMapper) {
         this.metadataMapper = metadataMapper;
     }
