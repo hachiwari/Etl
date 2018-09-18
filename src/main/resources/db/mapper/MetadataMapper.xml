@@ -15,4 +15,22 @@
          where tableName = #{className} and success = 1;
     </select>
 
+    <insert id="insertBadDelivery">
+        insert into badDelivery (idDelivery, nameProvider, codeProduct, quantityProduct, timestampFrom, timestampTo)
+        values (#{delivery.idDelivery}, #{delivery.nameProvider}, #{delivery.codeProduct}, #{delivery.quantityProduct}, #{delivery.timestampFrom}, #{delivery.timestampTo});
+    </insert>
+
+    <insert id="insertBadSale">
+        insert into badSale (idSale, codeProduct, nameShop, quantityProduct, timestampFrom, timestampTo)
+        values (#{sale.idSale}, #{sale.codeProduct}, #{sale.nameShop}, #{sale.quantityProduct}, #{sale.timestampFrom}, #{sale.timestampTo});
+    </insert>
+
+    <select id="selectAllBadDelivery" resultType="com.tkurek.wat.Etl.model.stage.Stage_Delivery">
+        select * from badDelivery;
+    </select>
+
+    <select id="selectAllBadSale" resultType="com.tkurek.wat.Etl.model.stage.Stage_Sale">
+        select * from badSale;
+    </select>
+
 </mapper>

@@ -151,11 +151,13 @@
         <property name="logService" ref="logService"/>
         <property name="utilService" ref="utilService"/>
         <property name="stageMapper" ref="stageMapper"/>
+        <property name="metadataMapper" ref="metadataMapper"/>
     </bean>
    <bean id="saleTransformer" class="com.tkurek.wat.Etl.utils.transformer.SaleTransformer">
         <property name="logService" ref="logService"/>
         <property name="utilService" ref="utilService"/>
         <property name="stageMapper" ref="stageMapper"/>
+       <property name="metadataMapper" ref="metadataMapper"/>
     </bean>
 
     <bean id="brandLoader" class="com.tkurek.wat.Etl.utils.load.BrandLoader">

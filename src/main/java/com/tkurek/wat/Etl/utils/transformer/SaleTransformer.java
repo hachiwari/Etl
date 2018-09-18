@@ -1,6 +1,8 @@
 package com.tkurek.wat.Etl.utils.transformer;
 
+import com.tkurek.wat.Etl.mapper.MetadataMapper;
 import com.tkurek.wat.Etl.mapper.StageMapper;
+import com.tkurek.wat.Etl.model.stage.Stage_Delivery;
 import com.tkurek.wat.Etl.model.stage.Stage_Sale;
 import com.tkurek.wat.Etl.model.stage.tmp.Tmp_F_Sale;
 import com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Product;
@@ -21,6 +23,7 @@ public class SaleTransformer {
     private LogService logService;
     private UtilService utilService;
     private StageMapper stageMapper;
+    private MetadataMapper metadataMapper;
 
     public void transform() {
         try {
@@ -41,18 +44,27 @@ public class SaleTransformer {
                 .filter(stage -> (stage.getTimestampFrom().after(lastImport) || stage.getTimestampTo() != null && stage.getTimestampTo().after(lastImport)))
                 .collect(Collectors.toList());
 
+        Collection<Stage_Sale> badSales = this.metadataMapper.selectAllBadSale();
+        allObjects.addAll(badSales);
+
         for(Stage_Sale object : allNewObjects) {
             if (object.getTimestampTo() == null) {
                 Tmp_F_Sale newObject = createNew(object);
-                Tmp_F_Sale lastObject = this.stageMapper.selectLastTmpSale(object.getIdSale());
 
-                if (lastObject != null) {
-                    lastObject.setTimestampTo(new Timestamp(System.currentTimeMillis()));
-                    this.stageMapper.updateTmpSale(lastObject);
+                if (newObject == null) {
+                    this.metadataMapper.insertBadSale(object);
+                } else {
+
+                    Tmp_F_Sale lastObject = this.stageMapper.selectLastTmpSale(object.getIdSale());
+
+                    if (lastObject != null) {
+                        lastObject.setTimestampTo(new Timestamp(System.currentTimeMillis()));
+                        this.stageMapper.updateTmpSale(lastObject);
+                    }
+
+                    this.stageMapper.insertTmpSale(newObject);
+                    this.utilService.setStageToWarehouseId(object.getIdSale(), newObject.getIdSale(), Stage_Sale.class, Tmp_F_Sale.class);
                 }
-
-                this.stageMapper.insertTmpSale(newObject);
-                this.utilService.setStageToWarehouseId(object.getIdSale(), newObject.getIdSale(), Stage_Sale.class, Tmp_F_Sale.class);
             } else {
                 Tmp_F_Sale lastObject = this.stageMapper.selectLastTmpSale(object.getIdSale());
 
@@ -68,6 +80,11 @@ public class SaleTransformer {
         Tmp_F_Sale newObject = new Tmp_F_Sale();
         Long idShop = this.stageMapper.selectIdShopByName(object.getNameShop());
         Tmp_W_Product product = this.stageMapper.selectProductByCode(object.getCodeProduct());
+
+        if (idShop == null || product == null) {
+            return null;
+        }
+
         BigDecimal quantity = product.getPrice().multiply(new BigDecimal(object.getQuantityProduct()));
         newObject.setIdSale(object.getIdSale());
         newObject.setIdProduct(product.getIdProduct());
@@ -90,5 +107,9 @@ public class SaleTransformer {
 
     public void setStageMapper(StageMapper stageMapper) {
         this.stageMapper = stageMapper;
+    }
+
+    public void setMetadataMapper(MetadataMapper metadataMapper) {
+        this.metadataMapper = metadataMapper;
     }
 }
