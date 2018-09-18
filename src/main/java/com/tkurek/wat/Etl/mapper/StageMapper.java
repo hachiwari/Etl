@@ -59,6 +59,7 @@ public interface StageMapper {
     void deleteSourceToStageIdMap(@Param("sourceToStageIdMap") SourceToStageIdMap sourceToStageIdMap);
     void insertStageToWarehouseIdMap(@Param("stageToWarehouseIdMap") StageToWarehouseIdMap stageToWarehouseIdMap);
     StageToWarehouseIdMap selectStageToWarehouseIdMap(@Param("idStage") Long idStage, @Param("stageTableName") String stageTableName);
+
     void insertTmpBrand(@Param("brand") Tmp_W_Brand brand);
     void updateTmpBrand(@Param("brand") Tmp_W_Brand brand);
     Tmp_W_Brand selectLastTmpBrand(@Param("idBrand") Long idBrand);
@@ -102,5 +103,19 @@ public interface StageMapper {
     Long selectIdProviderByName(@Param("name") String name);
     Tmp_W_Product selectProductByCode(@Param("code") String code);
     Long selectIdShopByName(@Param("name") String name);
+
+    Collection<Tmp_W_Brand> selectAllTmpBrand();
+    Collection<Tmp_W_Country> selectAllTmpCountry();
+    Collection<Tmp_W_Producer> selectAllTmpProducer();
+    Collection<Tmp_W_Product> selectAllTmpProduct();
+    Collection<Tmp_W_Provider> selectAllTmpProvider();
+    Collection<Tmp_W_TypePrice> selectAllTmpTypePrice();
+    Collection<Tmp_W_Locality> selectAllTmpLocality();
+    Collection<Tmp_W_Region> selectAllTmpRegion();
+    Collection<Tmp_W_Shop> selectAllTmpShop();
+    Collection<Tmp_W_TypeWorker> selectAllTmpTypeWorker();
+    Collection<Tmp_W_Worker> selectAllTmpWorker();
+    Collection<Tmp_F_Delivery> selectAllTmpDelivery();
+    Collection<Tmp_F_Sale> selectAllTmpSale();
 
 }

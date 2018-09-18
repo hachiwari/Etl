@@ -3,12 +3,307 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tkurek.wat.Etl.mapper.StageMapper">
+<mapper namespace="com.tkurek.wat.Etl.mapper.WarehouseMapper">
 
-    <select id="testSelect2" resultType="java.lang.String" parameterType="long">
-        select r.name
-        from region as r
-        where r.idRegion = #{id}
+    <insert id="insertWBrand" useGeneratedKeys="true" keyProperty="brand.id" keyColumn="id">
+        insert into WBrand (idBrand, idProducer, name, subBrand, timestampFrom, timestampTo)
+         values (#{brand.idBrand}, #{brand.idProducer}, #{brand.name}, #{brand.subBrand}, #{brand.timestampFrom}, #{brand.timestampTo});
+    </insert>
+
+    <update id="updateWBrand">
+        update WBrand
+        set
+          idBrand = #{brand.idBrand},
+          idProducer = #{brand.idProducer},
+          name = #{brand.name},
+          subBrand = #{brand.subBrand},
+          timestampFrom = #{brand.timestampFrom},
+          timestampTo = #{brand.timestampTo}
+        where id = #{brand.id};
+    </update>
+
+    <select id="selectLastWBrand" resultType="com.tkurek.wat.Etl.model.warehouse.W_Brand">
+        select * from WBrand
+        where idBrand = #{idBrand} and timestampTo is null;
+    </select>
+
+    <insert id="insertWCountry" useGeneratedKeys="true" keyProperty="country.id" keyColumn="id">
+        insert into WCountry (idCountry, name, code, timestampFrom, timestampTo)
+         values (#{country.idCountry}, #{country.name}, #{country.code}, #{country.timestampFrom}, #{country.timestampTo});
+    </insert>
+
+    <update id="updateWCountry">
+        update WCountry
+        set
+          idCountry = #{country.idCountry},
+          name = #{country.name},
+          code = #{country.code},
+          timestampFrom = #{country.timestampFrom},
+          timestampTo = #{country.timestampTo}
+        where id = #{country.id};
+    </update>
+
+    <select id="selectLastWCountry" resultType="com.tkurek.wat.Etl.model.warehouse.W_Country">
+        select * from WCountry
+        where idCountry = #{idCountry} and timestampTo is null;
+    </select>
+
+    <insert id="insertWProducer" useGeneratedKeys="true" keyProperty="producer.id" keyColumn="id">
+        insert into WProducer (idProducer, name, address, city, zipCode, phone, timestampFrom, timestampTo)
+         values (#{producer.idProducer}, #{producer.name}, #{producer.address}, #{producer.city}, #{producer.zipCode}, #{producer.phone}, #{producer.timestampFrom}, #{producer.timestampTo});
+    </insert>
+
+    <update id="updateWProducer">
+        update WProducer
+        set
+          idProducer = #{producer.idProducer},
+          name = #{producer.name},
+          address = #{producer.address},
+          city = #{producer.city},
+          zipCode = #{producer.zipCode},
+          phone = #{producer.phone},
+          timestampFrom = #{producer.timestampFrom},
+          timestampTo = #{producer.timestampTo}
+        where id = #{producer.id};
+    </update>
+
+    <select id="selectLastWProducer" resultType="com.tkurek.wat.Etl.model.warehouse.W_Producer">
+        select * from WProducer
+        where idProducer = #{idProducer} and timestampTo is null;
+    </select>
+
+    <insert id="insertWProvider" useGeneratedKeys="true" keyProperty="provider.id" keyColumn="id">
+        insert into WProvider (idProvider, idCountry, name, address, city, zipCode, phone, timestampFrom, timestampTo)
+         values (#{provider.idProvider}, #{provider.idCountry}, #{provider.name}, #{provider.address}, #{provider.city}, #{provider.zipCode}, #{provider.phone}, #{provider.timestampFrom}, #{provider.timestampTo});
+    </insert>
+
+    <update id="updateWProvider">
+        update WProvider
+        set
+          idProvider = #{provider.idProvider},
+          idCountry = #{provider.idCountry},
+          name = #{provider.name},
+          address = #{provider.address},
+          city = #{provider.city},
+          zipCode = #{provider.zipCode},
+          phone = #{provider.phone},
+          timestampFrom = #{provider.timestampFrom},
+          timestampTo = #{provider.timestampTo}
+        where id = #{provider.id};
+    </update>
+
+    <select id="selectLastWProvider" resultType="com.tkurek.wat.Etl.model.warehouse.W_Provider">
+        select * from WProvider
+        where idProvider = #{idProvider} and timestampTo is null;
+    </select>
+
+    <insert id="insertWTypePrice" useGeneratedKeys="true" keyProperty="typePrice.id" keyColumn="id">
+        insert into WTypePrice (idTypePrice, name, timestampFrom, timestampTo)
+         values (#{typePrice.idTypePrice}, #{typePrice.name}, #{typePrice.timestampFrom}, #{typePrice.timestampTo});
+    </insert>
+
+    <update id="updateWTypePrice">
+        update WTypePrice
+        set
+          idTypePrice = #{typePrice.idTypePrice},
+          name = #{typePrice.name},
+          timestampFrom = #{typePrice.timestampFrom},
+          timestampTo = #{typePrice.timestampTo}
+        where id = #{typePrice.id};
+    </update>
+
+    <select id="selectLastWTypePrice" resultType="com.tkurek.wat.Etl.model.warehouse.W_TypePrice">
+        select * from WTypePrice
+        where idTypePrice = #{idTypePrice} and timestampTo is null;
+    </select>
+
+    <insert id="insertWProduct" useGeneratedKeys="true" keyProperty="product.id" keyColumn="id">
+        insert into WProduct (idProduct, idBrand, name, code, category, type, price, idTypePrice, quantity, description, timestampFrom, timestampTo)
+         values (#{product.idProduct}, #{product.idBrand}, #{product.name}, #{product.code}, #{product.category}, #{product.type}, #{product.price}, #{product.idTypePrice}, #{product.quantity}, #{product.description}, #{product.timestampFrom}, #{product.timestampTo});
+    </insert>
+
+    <update id="updateWProduct">
+        update WProduct
+        set
+          idProduct = #{product.idProduct},
+          idBrand = #{product.idBrand},
+          name = #{product.name},
+          code = #{product.code},
+          category = #{product.category},
+          type = #{product.type},
+          price = #{product.price},
+          idTypePrice = #{product.idTypePrice},
+          quantity = #{product.quantity},
+          description = #{product.description},
+          timestampFrom = #{product.timestampFrom},
+          timestampTo = #{product.timestampTo}
+        where id = #{product.id};
+    </update>
+
+    <select id="selectLastWProduct" resultType="com.tkurek.wat.Etl.model.warehouse.W_Product">
+        select * from WProduct
+        where idProduct = #{idProduct} and timestampTo is null;
+    </select>
+
+    <insert id="insertWLocality" useGeneratedKeys="true" keyProperty="locality.id" keyColumn="id">
+        insert into WLocality (idLocality, idRegion, name, timestampFrom, timestampTo)
+         values (#{locality.idLocality}, #{locality.idRegion}, #{locality.name}, #{locality.timestampFrom}, #{locality.timestampTo});
+    </insert>
+
+    <update id="updateWLocality">
+        update WLocality
+        set
+          idLocality = #{locality.idLocality},
+          idRegion = #{locality.idRegion},
+          name = #{locality.name},
+          timestampFrom = #{locality.timestampFrom},
+          timestampTo = #{locality.timestampTo}
+        where id = #{locality.id};
+    </update>
+
+    <select id="selectLastWLocality" resultType="com.tkurek.wat.Etl.model.warehouse.W_Locality">
+        select * from WLocality
+        where idLocality = #{idLocality} and timestampTo is null;
+    </select>
+
+    <insert id="insertWRegion" useGeneratedKeys="true" keyProperty="region.id" keyColumn="id">
+        insert into WRegion (idRegion, name, country, timestampFrom, timestampTo)
+         values (#{region.idRegion}, #{region.name}, #{region.country}, #{region.timestampFrom}, #{region.timestampTo});
+    </insert>
+
+    <update id="updateWRegion">
+        update WRegion
+        set
+          idRegion = #{region.idRegion},
+          name = #{region.name},
+          country = #{region.country},
+          timestampFrom = #{region.timestampFrom},
+          timestampTo = #{region.timestampTo}
+        where id = #{region.id};
+    </update>
+
+    <select id="selectLastWRegion" resultType="com.tkurek.wat.Etl.model.warehouse.W_Region">
+        select * from WRegion
+        where idRegion = #{idRegion} and timestampTo is null;
+    </select>
+
+    <insert id="insertWShop" useGeneratedKeys="true" keyProperty="shop.id" keyColumn="id">
+        insert into WShop (idShop, idLocality, name, phone, address, zipCode, timestampFrom, timestampTo)
+         values (#{shop.idShop}, #{shop.idLocality}, #{shop.name}, #{shop.phone}, #{shop.address}, #{shop.zipCode}, #{shop.timestampFrom}, #{shop.timestampTo});
+    </insert>
+
+    <update id="updateWShop">
+        update WShop
+        set
+          idShop = #{shop.idShop},
+          idLocality = #{shop.idLocality},
+          name = #{shop.name},
+          phone = #{shop.phone},
+          address = #{shop.address},
+          zipCode = #{shop.zipCode},
+          timestampFrom = #{shop.timestampFrom},
+          timestampTo = #{shop.timestampTo}
+        where id = #{shop.id};
+    </update>
+
+    <select id="selectLastWShop" resultType="com.tkurek.wat.Etl.model.warehouse.W_Shop">
+        select * from WShop
+        where idShop = #{idShop} and timestampTo is null;
+    </select>
+
+    <insert id="insertWTypeWorker" useGeneratedKeys="true" keyProperty="typeWorker.id" keyColumn="id">
+        insert into WTypeWorker (idTypeWorker, name, timestampFrom, timestampTo)
+         values (#{typeWorker.idTypeWorker}, #{typeWorker.name}, #{typeWorker.timestampFrom}, #{typeWorker.timestampTo});
+    </insert>
+
+    <update id="updateWTypeWorker">
+        update WTypeWorker
+        set
+          idTypeWorker = #{typeWorker.idTypeWorker},
+          name = #{typeWorker.name},
+          timestampFrom = #{typeWorker.timestampFrom},
+          timestampTo = #{typeWorker.timestampTo}
+        where id = #{typeWorker.id};
+    </update>
+
+    <select id="selectLastWTypeWorker" resultType="com.tkurek.wat.Etl.model.warehouse.W_TypeWorker">
+        select * from WTypeWorker
+        where idTypeWorker = #{idTypeWorker} and timestampTo is null;
+    </select>
+
+    <insert id="insertWWorker" useGeneratedKeys="true" keyProperty="worker.id" keyColumn="id">
+        insert into WWorker (idWorker, firstName, lastName, idTypeWorker, pesel, phone, address, city, zipCode, timestampFrom, timestampTo)
+         values (#{worker.idWorker}, #{worker.firstName}, #{worker.lastName}, #{worker.idTypeWorker}, #{worker.pesel}, #{worker.phone}, #{worker.address}, #{worker.city}, #{worker.zipCode}, #{worker.timestampFrom}, #{worker.timestampTo});
+    </insert>
+
+    <update id="updateWWorker">
+        update WWorker
+        set
+          idWorker = #{worker.idWorker},
+          firstName = #{worker.firstName},
+          lastName = #{worker.lastName},
+          idTypeWorker = #{worker.idTypeWorker},
+          pesel = #{worker.pesel},
+          phone = #{worker.phone},
+          address = #{worker.address},
+          city = #{worker.city},
+          zipCode = #{worker.zipCode},
+          timestampFrom = #{worker.timestampFrom},
+          timestampTo = #{worker.timestampTo}
+        where id = #{worker.id};
+    </update>
+
+    <select id="selectLastWWorker" resultType="com.tkurek.wat.Etl.model.warehouse.W_Worker">
+        select * from WWorker
+        where idWorker = #{idWorker} and timestampTo is null;
+    </select>
+
+    <insert id="insertFDelivery" useGeneratedKeys="true" keyProperty="delivery.id" keyColumn="id">
+        insert into FDelivery (idDelivery, idProvider, idProduct, quantityProduct, price, idTypePrice, timestampFrom, timestampTo)
+         values (#{delivery.idDelivery}, #{delivery.idProvider}, #{delivery.idProduct}, #{delivery.quantityProduct}, #{delivery.price}, #{delivery.idTypePrice}, #{delivery.timestampFrom}, #{delivery.timestampTo});
+    </insert>
+
+    <update id="updateFDelivery">
+        update FDelivery
+        set
+          idDelivery = #{delivery.idDelivery},
+          idProvider = #{delivery.idProvider},
+          idProduct = #{delivery.idProduct},
+          quantityProduct = #{delivery.quantityProduct},
+          price = #{delivery.price},
+          idTypePrice = #{delivery.idTypePrice},
+          timestampFrom = #{delivery.timestampFrom},
+          timestampTo = #{delivery.timestampTo}
+        where id = #{delivery.id};
+    </update>
+
+    <select id="selectLastFDelivery" resultType="com.tkurek.wat.Etl.model.warehouse.F_Delivery">
+        select * from FDelivery
+        where idDelivery = #{idDelivery} and timestampTo is null;
+    </select>
+
+    <insert id="insertFSale" useGeneratedKeys="true" keyProperty="sale.id" keyColumn="id">
+        insert into FSale (idSale, idProduct, idShop, quantityProduct, price, idTypePrice, timestampFrom, timestampTo)
+         values (#{sale.idSale}, #{sale.idProduct}, #{sale.idShop}, #{sale.quantityProduct}, #{sale.price}, #{sale.idTypePrice}, #{sale.timestampFrom}, #{sale.timestampTo});
+    </insert>
+
+    <update id="updateFSale">
+        update FSale
+        set
+          idSale = #{sale.idSale},
+          idProduct = #{sale.idProduct},
+          idShop = #{sale.idShop},
+          quantityProduct = #{sale.quantityProduct},
+          price = #{sale.price},
+          idTypePrice = #{sale.idTypePrice},
+          timestampFrom = #{sale.timestampFrom},
+          timestampTo = #{sale.timestampTo}
+        where id = #{sale.id};
+    </update>
+
+    <select id="selectLastFSale" resultType="com.tkurek.wat.Etl.model.warehouse.F_Sale">
+        select * from FSale
+        where idSale = #{idSale} and timestampTo is null;
     </select>
 
 </mapper>

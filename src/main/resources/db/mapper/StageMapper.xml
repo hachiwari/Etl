@@ -630,4 +630,56 @@
         where name = #{name} and timestampTo is null;
     </select>
 
+    <select id="selectAllTmpBrand" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Brand">
+        select * from tmpWBrand;
+    </select>
+
+    <select id="selectAllTmpCountry" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Country">
+        select * from tmpWCountry;
+    </select>
+
+    <select id="selectAllTmpProducer" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Producer">
+        select * from tmpWProducer;
+    </select>
+
+    <select id="selectAllTmpProduct" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Product">
+        select * from tmpWProduct;
+    </select>
+
+    <select id="selectAllTmpProvider" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Provider">
+        select * from tmpWProvider;
+    </select>
+
+    <select id="selectAllTmpTypePrice" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_TypePrice">
+        select * from tmpWTypePrice;
+    </select>
+
+    <select id="selectAllTmpLocality" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Locality">
+        select * from tmpWLocality;
+    </select>
+
+    <select id="selectAllTmpRegion" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Region">
+        select * from tmpWRegion;
+    </select>
+
+    <select id="selectAllTmpShop" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Shop">
+        select * from tmpWShop;
+    </select>
+
+    <select id="selectAllTmpTypeWorker" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_TypeWorker">
+        select * from tmpWTypeWorker;
+    </select>
+
+    <select id="selectAllTmpWorker" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Worker">
+        select * from tmpWWorker;
+    </select>
+
+    <select id="selectAllTmpDelivery" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_F_Delivery">
+        select * from tmpFDelivery;
+    </select>
+
+    <select id="selectAllTmpSale" resultType="com.tkurek.wat.Etl.model.stage.tmp.Tmp_F_Sale">
+        select * from tmpFSale;
+    </select>
+
 </mapper>

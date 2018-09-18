@@ -1,6 +1,7 @@
 package com.tkurek.wat.Etl.web;
 
 import com.tkurek.wat.Etl.service.ExtractService;
+import com.tkurek.wat.Etl.service.LoadService;
 import com.tkurek.wat.Etl.service.TransformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +17,13 @@ public class EtlController {
 
     private ExtractService extractService;
     private TransformService transformService;
+    private LoadService loadService;
 
     @Autowired
-    private EtlController(ExtractService extractService, TransformService transformService) {
+    private EtlController(ExtractService extractService, TransformService transformService, LoadService loadService) {
         this.extractService = extractService;
         this.transformService = transformService;
+        this.loadService = loadService;
     }
 
     @ResponseBody
@@ -28,7 +31,7 @@ public class EtlController {
     String runEtl() {
         this.extractService.extract();
         this.transformService.transform();
-        //TODO load
+        this.loadService.load();
         LOG.info("Success!");
         return "Success!";
     }

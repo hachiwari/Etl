@@ -158,6 +158,72 @@
         <property name="stageMapper" ref="stageMapper"/>
     </bean>
 
+    <bean id="brandLoader" class="com.tkurek.wat.Etl.utils.load.BrandLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+    <bean id="countryLoader" class="com.tkurek.wat.Etl.utils.load.CountryLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+    <bean id="producerLoader" class="com.tkurek.wat.Etl.utils.load.ProducerLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+    <bean id="providerLoader" class="com.tkurek.wat.Etl.utils.load.ProviderLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+    <bean id="typePriceLoader" class="com.tkurek.wat.Etl.utils.load.TypePriceLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+    <bean id="productLoader" class="com.tkurek.wat.Etl.utils.load.ProductLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+    <bean id="localityLoader" class="com.tkurek.wat.Etl.utils.load.LocalityLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+    <bean id="regionLoader" class="com.tkurek.wat.Etl.utils.load.RegionLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+    <bean id="shopLoader" class="com.tkurek.wat.Etl.utils.load.ShopLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+    <bean id="typeWorkerLoader" class="com.tkurek.wat.Etl.utils.load.TypeWorkerLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+   <bean id="workerLoader" class="com.tkurek.wat.Etl.utils.load.WorkerLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+   <bean id="deliveryLoader" class="com.tkurek.wat.Etl.utils.load.DeliveryLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+   <bean id="saleLoader" class="com.tkurek.wat.Etl.utils.load.SaleLoader">
+        <property name="logService" ref="logService"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+
     <bean id="logService" class="com.tkurek.wat.Etl.service.impl.LogServiceImpl">
         <property name="metadataMapper" ref="metadataMapper"/>
     </bean>
@@ -198,4 +264,21 @@
         <property name="deliveryTransformer" ref="deliveryTransformer"/>
         <property name="saleTransformer" ref="saleTransformer"/>
     </bean>
+
+    <bean id="loadService" class="com.tkurek.wat.Etl.service.impl.LoadServiceImpl">
+        <property name="brandLoader" ref="brandLoader"/>
+        <property name="countryLoader" ref="countryLoader"/>
+        <property name="producerLoader" ref="producerLoader"/>
+        <property name="providerLoader" ref="providerLoader"/>
+        <property name="typePriceLoader" ref="typePriceLoader"/>
+        <property name="productLoader" ref="productLoader"/>
+        <property name="localityLoader" ref="localityLoader"/>
+        <property name="regionLoader" ref="regionLoader"/>
+        <property name="shopLoader" ref="shopLoader"/>
+        <property name="typeWorkerLoader" ref="typeWorkerLoader"/>
+        <property name="workerLoader" ref="workerLoader"/>
+        <property name="deliveryLoader" ref="deliveryLoader"/>
+        <property name="saleLoader" ref="saleLoader"/>
+    </bean>
+
 </beans>

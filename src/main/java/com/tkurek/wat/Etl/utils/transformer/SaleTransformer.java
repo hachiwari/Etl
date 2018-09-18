@@ -69,7 +69,6 @@ public class SaleTransformer {
         Long idShop = this.stageMapper.selectIdShopByName(object.getNameShop());
         Tmp_W_Product product = this.stageMapper.selectProductByCode(object.getCodeProduct());
         BigDecimal quantity = product.getPrice().multiply(new BigDecimal(object.getQuantityProduct()));
-
         newObject.setIdSale(object.getIdSale());
         newObject.setIdProduct(product.getIdProduct());
         newObject.setIdShop(idShop);

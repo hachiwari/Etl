@@ -202,7 +202,6 @@ create table stageToWarehouseIdMap (
 );
 -- rollback drop table stageToWarehouseIdMap;
 
-
 -- changeset tkurek:create-tmpWBrand
 create table tmpWBrand (
   id            serial,

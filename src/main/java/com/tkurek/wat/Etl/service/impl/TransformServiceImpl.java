@@ -25,7 +25,7 @@ public class TransformServiceImpl implements TransformService {
 
     @Override
     public void transform() {
-        LOG.info("Init Tranform");
+        LOG.info("Init Transform");
         this.brandTransformer.transform();
         this.countryTransformer.transform();
         this.producerTransformer.transform();
@@ -39,7 +39,7 @@ public class TransformServiceImpl implements TransformService {
         this.workerTransformer.transform();
         this.deliveryTransformer.transform();
         this.saleTransformer.transform();
-        LOG.info("Done Tranform");
+        LOG.info("Done Transform");
     }
 
     public void setBrandTransformer(BrandTransformer brandTransformer) {
