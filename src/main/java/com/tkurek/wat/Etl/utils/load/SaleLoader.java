@@ -3,6 +3,7 @@ package com.tkurek.wat.Etl.utils.load;
 import com.tkurek.wat.Etl.mapper.StageMapper;
 import com.tkurek.wat.Etl.mapper.WarehouseMapper;
 import com.tkurek.wat.Etl.model.stage.tmp.Tmp_F_Sale;
+import com.tkurek.wat.Etl.model.warehouse.F_Delivery;
 import com.tkurek.wat.Etl.model.warehouse.F_Sale;
 import com.tkurek.wat.Etl.service.LogService;
 import org.slf4j.Logger;
@@ -28,6 +29,10 @@ public class SaleLoader {
             this.logService.logImport(F_Sale.class.getSimpleName(), new Timestamp(System.currentTimeMillis()), false);
             LOG.error("error while load Sale: ", e);
         }
+    }
+
+    public Collection<F_Sale> getAllSales() {
+        return warehouseMapper.selectAllFSales();
     }
 
     private void run() {

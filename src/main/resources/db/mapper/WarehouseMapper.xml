@@ -310,4 +310,12 @@
         delete from ${tableName};
     </delete>
 
+    <select id="selectAllFDeliveries" resultType="com.tkurek.wat.Etl.model.warehouse.F_Delivery">
+        select * from FDelivery;
+    </select>
+
+    <select id="selectAllFSales" resultType="com.tkurek.wat.Etl.model.warehouse.F_Sale">
+        select * from FSale;
+    </select>
+
 </mapper>

@@ -30,6 +30,10 @@ public class DeliveryLoader {
         }
     }
 
+    public Collection<F_Delivery> getAllDeliveries() {
+        return warehouseMapper.selectAllFDeliveries();
+    }
+
     private void run() {
         Collection<Tmp_F_Delivery> allStages = this.stageMapper.selectAllTmpDelivery();
         Timestamp lastImport = this.logService.getLastImportToStage(F_Delivery.class.getSimpleName());

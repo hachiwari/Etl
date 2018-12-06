@@ -3,6 +3,8 @@ package com.tkurek.wat.Etl.mapper;
 import com.tkurek.wat.Etl.model.warehouse.*;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Collection;
+
 public interface WarehouseMapper {
 
     void insertWBrand(@Param("brand") W_Brand brand);
@@ -46,4 +48,7 @@ public interface WarehouseMapper {
     F_Sale selectLastFSale(@Param("idSale") Long idSale);
 
     void cleanTable(@Param("tableName") String tableName);
+
+    Collection<F_Delivery> selectAllFDeliveries();
+    Collection<F_Sale> selectAllFSales();
 }

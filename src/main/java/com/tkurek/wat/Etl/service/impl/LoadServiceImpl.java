@@ -1,9 +1,13 @@
 package com.tkurek.wat.Etl.service.impl;
 
+import com.tkurek.wat.Etl.model.warehouse.F_Delivery;
+import com.tkurek.wat.Etl.model.warehouse.F_Sale;
 import com.tkurek.wat.Etl.service.LoadService;
 import com.tkurek.wat.Etl.utils.load.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Collection;
 
 public class LoadServiceImpl implements LoadService {
 
@@ -40,6 +44,16 @@ public class LoadServiceImpl implements LoadService {
         this.deliveryLoader.load();
         this.saleLoader.load();
         LOG.info("Done Load");
+    }
+
+    @Override
+    public Collection<F_Delivery> getAllDeliveries() {
+        return deliveryLoader.getAllDeliveries();
+    }
+
+    @Override
+    public Collection<F_Sale> getAllSales() {
+        return saleLoader.getAllSales();
     }
 
     public void setBrandLoader(BrandLoader brandLoader) {
