@@ -45,6 +45,7 @@ public class SaleTransformer {
                 .collect(Collectors.toList());
 
         Collection<Stage_Sale> badSales = this.metadataMapper.selectAllBadSale();
+        this.metadataMapper.checkAsExecutedAllBadSale();
         allNewObjects.addAll(badSales);
 
         for(Stage_Sale object : allNewObjects) {
@@ -92,7 +93,7 @@ public class SaleTransformer {
         newObject.setQuantityProduct(object.getQuantityProduct());
         newObject.setPrice(quantity);
         newObject.setIdTypePrice(product.getIdTypePrice());
-        newObject.setTimestampFrom(object.getTimestampFrom());
+        newObject.setTimestampFrom(new Timestamp(System.currentTimeMillis()));
         newObject.setTimestampTo(object.getTimestampTo());
         return newObject;
     }

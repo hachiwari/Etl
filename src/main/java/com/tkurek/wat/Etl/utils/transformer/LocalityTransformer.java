@@ -67,7 +67,7 @@ public class LocalityTransformer {
         newObject.setIdLocality(object.getIdLocality());
         newObject.setIdRegion(object.getIdRegion());
         newObject.setName(object.getName());
-        newObject.setTimestampFrom(object.getTimestampFrom());
+        newObject.setTimestampFrom(new Timestamp(System.currentTimeMillis()));
         newObject.setTimestampTo(object.getTimestampTo());
         return newObject;
     }

@@ -76,7 +76,7 @@ public class ProductTransformer {
         newObject.setIdTypePrice(object.getIdTypePrice());
         newObject.setQuantity(object.getQuantity());
         newObject.setDescription(object.getDescription());
-        newObject.setTimestampFrom(object.getTimestampFrom());
+        newObject.setTimestampFrom(new Timestamp(System.currentTimeMillis()));
         newObject.setTimestampTo(object.getTimestampTo());
         return newObject;
     }

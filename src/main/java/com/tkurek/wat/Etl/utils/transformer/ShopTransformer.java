@@ -71,7 +71,7 @@ public class ShopTransformer {
         newObject.setAddress(object.getAddress());
         newObject.setZipCode(object.getZipCode());
         newObject.setPhone(object.getPhone());
-        newObject.setTimestampFrom(object.getTimestampFrom());
+        newObject.setTimestampFrom(new Timestamp(System.currentTimeMillis()));
         newObject.setTimestampTo(object.getTimestampTo());
         return newObject;
     }

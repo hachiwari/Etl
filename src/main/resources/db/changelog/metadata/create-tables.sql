@@ -17,7 +17,8 @@ create table badDelivery (
   codeProduct     character varying(255),
   quantityProduct integer,
   timestampFrom   timestamp NULL DEFAULT NULL,
-  timestampTo     timestamp NULL DEFAULT NULL
+  timestampTo     timestamp NULL DEFAULT NULL,
+  executed        tinyint
 );
 -- rollback drop table badDelivery;
 
@@ -28,6 +29,7 @@ create table badSale (
   nameShop        character varying(255),
   quantityProduct integer,
   timestampFrom   timestamp NULL DEFAULT NULL,
-  timestampTo     timestamp NULL DEFAULT NULL
+  timestampTo     timestamp NULL DEFAULT NULL,
+  executed        tinyint
 );
 -- rollback drop table badSale;

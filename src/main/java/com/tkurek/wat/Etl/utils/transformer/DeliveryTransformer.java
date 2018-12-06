@@ -45,6 +45,7 @@ public class DeliveryTransformer {
                 .collect(Collectors.toList());
 
         Collection<Stage_Delivery> badDeliveries = this.metadataMapper.selectAllBadDelivery();
+        this.metadataMapper.checkAsExecutedAllBadDelivery();
         allNewObjects.addAll(badDeliveries);
 
         for(Stage_Delivery object : allNewObjects) {
@@ -91,7 +92,7 @@ public class DeliveryTransformer {
         newObject.setQuantityProduct(object.getQuantityProduct());
         newObject.setPrice(quantity);
         newObject.setIdTypePrice(product.getIdTypePrice());
-        newObject.setTimestampFrom(object.getTimestampFrom());
+        newObject.setTimestampFrom(new Timestamp(System.currentTimeMillis()));
         newObject.setTimestampTo(object.getTimestampTo());
         return newObject;
     }

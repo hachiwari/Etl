@@ -67,7 +67,7 @@ public class CountryTransformer {
         newObject.setIdCountry(object.getIdCountry());
         newObject.setName(object.getName());
         newObject.setCode(object.getCode());
-        newObject.setTimestampFrom(object.getTimestampFrom());
+        newObject.setTimestampFrom(new Timestamp(System.currentTimeMillis()));
         newObject.setTimestampTo(object.getTimestampTo());
         return newObject;
     }

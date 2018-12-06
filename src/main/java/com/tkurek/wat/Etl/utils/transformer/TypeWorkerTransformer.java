@@ -66,7 +66,7 @@ public class TypeWorkerTransformer {
         Tmp_W_TypeWorker newObject = new Tmp_W_TypeWorker();
         newObject.setIdTypeWorker(object.getIdTypeWorker());
         newObject.setName(object.getName());
-        newObject.setTimestampFrom(object.getTimestampFrom());
+        newObject.setTimestampFrom(new Timestamp(System.currentTimeMillis()));
         newObject.setTimestampTo(object.getTimestampTo());
         return newObject;
     }

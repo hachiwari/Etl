@@ -69,7 +69,7 @@ public class BrandTransformer {
         newObject.setIdProducer(object.getIdProducer());
         newObject.setName(object.getName());
         newObject.setSubBrand(object.getSubBrand());
-        newObject.setTimestampFrom(object.getTimestampFrom());
+        newObject.setTimestampFrom(new Timestamp(System.currentTimeMillis()));
         newObject.setTimestampTo(object.getTimestampTo());
         return newObject;
     }

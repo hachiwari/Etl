@@ -16,22 +16,36 @@
     </select>
 
     <insert id="insertBadDelivery">
-        insert into badDelivery (idDelivery, nameProvider, codeProduct, quantityProduct, timestampFrom, timestampTo)
-        values (#{delivery.idDelivery}, #{delivery.nameProvider}, #{delivery.codeProduct}, #{delivery.quantityProduct}, #{delivery.timestampFrom}, #{delivery.timestampTo});
+        insert into badDelivery (idDelivery, nameProvider, codeProduct, quantityProduct, timestampFrom, timestampTo, executed)
+        values (#{delivery.idDelivery}, #{delivery.nameProvider}, #{delivery.codeProduct}, #{delivery.quantityProduct}, #{delivery.timestampFrom}, #{delivery.timestampTo}, 0);
     </insert>
 
     <insert id="insertBadSale">
-        insert into badSale (idSale, codeProduct, nameShop, quantityProduct, timestampFrom, timestampTo)
-        values (#{sale.idSale}, #{sale.codeProduct}, #{sale.nameShop}, #{sale.quantityProduct}, #{sale.timestampFrom}, #{sale.timestampTo});
+        insert into badSale (idSale, codeProduct, nameShop, quantityProduct, timestampFrom, timestampTo, executed)
+        values (#{sale.idSale}, #{sale.codeProduct}, #{sale.nameShop}, #{sale.quantityProduct}, #{sale.timestampFrom}, #{sale.timestampTo}, 0);
     </insert>
 
     <select id="selectAllBadDelivery" resultType="com.tkurek.wat.Etl.model.stage.Stage_Delivery">
-        select * from badDelivery;
+        select idDelivery, nameProvider, codeProduct, quantityProduct, timestampFrom, timestampTo
+        from badDelivery
+        where executed = 0;
     </select>
 
     <select id="selectAllBadSale" resultType="com.tkurek.wat.Etl.model.stage.Stage_Sale">
-        select * from badSale;
+        select idSale, codeProduct, nameShop, quantityProduct, timestampFrom, timestampTo
+        from badSale
+        where executed = 0;
     </select>
+
+    <update id="checkAsExecutedAllBadDelivery">
+        update badDelivery
+        set executed = 1;
+    </update>
+
+    <update id="checkAsExecutedAllBadSale">
+        update badSale
+        set executed = 1;
+    </update>
 
     <delete id="cleanTable">
         delete from ${tableName};
