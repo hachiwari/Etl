@@ -45,13 +45,13 @@ public class EtlController {
     }
 
     @ResponseBody
-    @RequestMapping("/resport/delivery")
+    @RequestMapping("/report/delivery")
     Collection<F_Delivery> showAllDeliveries() {
         return loadService.getAllDeliveries();
     }
 
-     @ResponseBody
-    @RequestMapping("/resport/sale")
+    @ResponseBody
+    @RequestMapping("/report/sale")
     Collection<F_Sale> showAllSales() {
         return loadService.getAllSales();
     }
