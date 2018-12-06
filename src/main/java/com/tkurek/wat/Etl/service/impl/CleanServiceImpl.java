@@ -13,20 +13,22 @@ public class CleanServiceImpl implements CleanService  {
     private StageMapper stageMapper;
     private WarehouseMapper warehouseMapper;
 
-    public static final String PHASE_METADATA = "METADATA";
-    public static final String PHASE_STAGE = "STAGE";
-    public static final String PHASE_WAREHOUSE = "WAREHOUSE";
+    private static final String PHASE_METADATA = "METADATA";
+    private static final String PHASE_STAGE = "STAGE";
+    private static final String PHASE_WAREHOUSE = "WAREHOUSE";
 
     private final static Map<String, List<String>> allTables = new HashMap<String, List<String>>() {{
         put(PHASE_METADATA, Arrays.asList("logImporter", "badDelivery", "badSale"));
-        put(PHASE_STAGE, Arrays.asList("brand", "country", "delivery", "locality", "producer", "product", "provider", "region", "sale", "shop", "typePrice", "typeWorker", "worker",
-                                    "tmpWBrand", "tmpWCountry", "tmpFDelivery", "tmpWLocality", "tmpWProducer", "tmpWProduct", "tmpWProvider", "tmpWRegion", "tmpFSale", "tmpWShop", "tmpWTypePrice", "tmpWTypeWorker", "tmpWWorker",
-                                    "sourceToStageIdMap", "stageToWarehouseIdMap"));
+        put(PHASE_STAGE, Arrays.asList(
+            "brand", "country", "delivery", "locality", "producer", "product", "provider", "region", "sale", "shop", "typePrice", "typeWorker", "worker",
+            "tmpWBrand", "tmpWCountry", "tmpFDelivery", "tmpWLocality", "tmpWProducer", "tmpWProduct", "tmpWProvider", "tmpWRegion", "tmpFSale", "tmpWShop", "tmpWTypePrice", "tmpWTypeWorker", "tmpWWorker",
+            "sourceToStageIdMap", "stageToWarehouseIdMap"
+        ));
         put(PHASE_WAREHOUSE, Arrays.asList("WBrand", "WCountry", "FDelivery", "WLocality", "WProducer", "WProduct", "WProvider", "WRegion", "FSale", "WShop", "WTypePrice", "WTypeWorker", "WWorker"));
     }};
 
     @Override
-    public void cleanAllTables() {
+    public void cleanAllPhases() {
         cleanPhase(PHASE_METADATA);
         cleanPhase(PHASE_STAGE);
         cleanPhase(PHASE_WAREHOUSE);

@@ -2,7 +2,6 @@ package com.tkurek.wat.Etl.utils.load;
 
 import com.tkurek.wat.Etl.mapper.StageMapper;
 import com.tkurek.wat.Etl.mapper.WarehouseMapper;
-import com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Brand;
 import com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Brand;
 import com.tkurek.wat.Etl.model.warehouse.W_Brand;
 import com.tkurek.wat.Etl.service.LogService;

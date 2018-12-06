@@ -1,11 +1,8 @@
 package com.tkurek.wat.Etl.utils.extractor;
 
-import com.tkurek.wat.Etl.mapper.SourceTwoMapper;
 import com.tkurek.wat.Etl.mapper.StageMapper;
 import com.tkurek.wat.Etl.model.sourceCsv.SourceDelivery;
-import com.tkurek.wat.Etl.model.sourceTwo.SourceTwo_Worker;
 import com.tkurek.wat.Etl.model.stage.Stage_Delivery;
-import com.tkurek.wat.Etl.model.stage.sourceTwo.Stage_Worker;
 import com.tkurek.wat.Etl.service.LogService;
 import com.tkurek.wat.Etl.service.UtilService;
 import org.slf4j.Logger;
@@ -90,11 +87,7 @@ public class SourceDeliveryExtractor {
         if (!sourceObject.getCodeProduct().equals(stageObject.getCodeProduct())) {
             return false;
         }
-        if (!sourceObject.getQuantityProduct().equals(stageObject.getQuantityProduct())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getQuantityProduct().equals(stageObject.getQuantityProduct());
     }
 
     public void setLogService(LogService logService) {

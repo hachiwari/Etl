@@ -85,11 +85,7 @@ public class SourceTwoRegionExtractor {
         if (!sourceObject.getName().equals(stageObject.getName())) {
             return false;
         }
-        if (!sourceObject.getCountry().equals(stageObject.getCountry())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getCountry().equals(stageObject.getCountry());
     }
 
     public void setLogService(LogService logService) {

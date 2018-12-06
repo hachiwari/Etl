@@ -42,10 +42,10 @@ public class EtlController {
 
     @ResponseBody
     @RequestMapping("/cleanAll")
-    String cleanAllTables() {
-        this.cleanService.cleanAllTables();
-        LOG.info("Cleaned all tables!");
-        return "Cleaned all tables!";
+    String cleanAllPhases() {
+        this.cleanService.cleanAllPhases();
+        LOG.info("Cleaned all phases!");
+        return "Cleaned all phases!";
     }
 
     @ResponseBody

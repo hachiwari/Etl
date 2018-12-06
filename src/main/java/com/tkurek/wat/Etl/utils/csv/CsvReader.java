@@ -1,7 +1,6 @@
 package com.tkurek.wat.Etl.utils.csv;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -14,7 +13,7 @@ public class CsvReader<T> {
 
     private String file;
 
-    private Map<String, Field> privateFields = new LinkedHashMap<String, Field>();
+    private Map<String, Field> privateFields = new LinkedHashMap<>();
 
     private Class<T> genericType;
 
@@ -66,7 +65,7 @@ public class CsvReader<T> {
      */
     public List<T> getData() {
         if (null == data) {
-            data = new ArrayList<T>();
+            data = new ArrayList<>();
         }
         return data;
     }
@@ -122,7 +121,7 @@ public class CsvReader<T> {
     private void readData() throws InstantiationException, IllegalAccessException {
 
         BufferedReader reader = null;
-        String line = null;
+        String line;
         try {
             reader = new BufferedReader(new FileReader(file));
             while ((line = reader.readLine()) != null) {
@@ -131,7 +130,6 @@ public class CsvReader<T> {
 
                 if (this.hasHeader) {
                     setHeaders(row);
-                    ;
                     this.hasHeader = false;
                     continue;
                 }
@@ -139,7 +137,7 @@ public class CsvReader<T> {
                 T refObject = genericType.newInstance();
                 int index = 0;
 
-                List<String> listOfFieldNames = (null != getOrder()) ? getOrder() : new ArrayList<String>(privateFields.keySet());
+                List<String> listOfFieldNames = (null != getOrder()) ? getOrder() : new ArrayList<>(privateFields.keySet());
 
                 for (String fieldName : listOfFieldNames) {
                     if (index >= row.size()) {
@@ -151,15 +149,13 @@ public class CsvReader<T> {
             }
 
             reader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
 
             try {
-                reader.close();
-            } catch (Exception e) {
+                Objects.requireNonNull(reader).close();
+            } catch (Exception ignored) {
 
             }
         }
@@ -180,7 +176,7 @@ public class CsvReader<T> {
         if (null != processsor) {
             List<T> list = getData();
             for (T obj : list) {
-                obj = processsor.process(obj);
+                processsor.process(obj);
             }
         }
         return this;

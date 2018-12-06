@@ -1,7 +1,6 @@
 package com.tkurek.wat.Etl.utils.transformer;
 
 import com.tkurek.wat.Etl.mapper.StageMapper;
-import com.tkurek.wat.Etl.model.sourceOne.SourceOne_Brand;
 import com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Brand;
 import com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Brand;
 import com.tkurek.wat.Etl.service.LogService;

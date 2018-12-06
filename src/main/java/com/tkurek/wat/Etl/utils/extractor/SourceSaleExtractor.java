@@ -87,11 +87,7 @@ public class SourceSaleExtractor {
         if (!sourceObject.getNameShop().equals(stageObject.getNameShop())) {
             return false;
         }
-        if (!sourceObject.getQuantityProduct().equals(stageObject.getQuantityProduct())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getQuantityProduct().equals(stageObject.getQuantityProduct());
     }
 
     public void setLogService(LogService logService) {

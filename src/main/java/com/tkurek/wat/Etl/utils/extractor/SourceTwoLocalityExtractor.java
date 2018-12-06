@@ -85,11 +85,7 @@ public class SourceTwoLocalityExtractor {
         if (!sourceObject.getName().equals(stageObject.getName())) {
             return false;
         }
-        if (!sourceObject.getIdRegion().equals(stageObject.getIdRegion())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getIdRegion().equals(stageObject.getIdRegion());
     }
 
     public void setLogService(LogService logService) {

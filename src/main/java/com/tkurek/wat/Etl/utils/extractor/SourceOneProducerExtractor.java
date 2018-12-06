@@ -97,11 +97,7 @@ public class SourceOneProducerExtractor {
         if (!sourceObject.getZipCode().equals(stageObject.getZipCode())) {
             return false;
         }
-        if (!sourceObject.getPhone().equals(stageObject.getPhone())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getPhone().equals(stageObject.getPhone());
     }
 
     public void setLogService(LogService logService) {

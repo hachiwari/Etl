@@ -9,6 +9,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class UtilServiceImpl implements UtilService {
 
@@ -50,7 +51,7 @@ public class UtilServiceImpl implements UtilService {
     public File[] getResourceFolderFiles(String folder) {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         URL url = loader.getResource(folder);
-        String path = url.getPath();
+        String path = Objects.requireNonNull(url).getPath();
         return new File(path).listFiles();
     }
 

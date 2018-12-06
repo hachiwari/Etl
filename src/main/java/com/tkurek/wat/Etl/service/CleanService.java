@@ -2,6 +2,6 @@ package com.tkurek.wat.Etl.service;
 
 public interface CleanService {
 
-    void cleanAllTables();
+    void cleanAllPhases();
     boolean cleanPhase(String phaseName);
 }

@@ -81,11 +81,7 @@ public class SourceTwoTypeWorkerExtractor {
         if (!sourceObject.getIdTypeWorker().equals(stageObject.getIdTypeWorker())) {
             return false;
         }
-        if (!sourceObject.getName().equals(stageObject.getName())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getName().equals(stageObject.getName());
     }
 
     public void setLogService(LogService logService) {

@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class DeliveryTransformer {

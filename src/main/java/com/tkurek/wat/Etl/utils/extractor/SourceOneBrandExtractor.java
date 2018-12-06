@@ -89,11 +89,7 @@ public class SourceOneBrandExtractor {
         if (!sourceObject.getName().equals(stageObject.getName())) {
             return false;
         }
-        if (!sourceObject.getSubBrand().equals(stageObject.getSubBrand())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getSubBrand().equals(stageObject.getSubBrand());
     }
 
     public void setLogService(LogService logService) {

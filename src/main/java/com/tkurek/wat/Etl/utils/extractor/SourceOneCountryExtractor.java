@@ -85,11 +85,7 @@ public class SourceOneCountryExtractor {
         if (!sourceObject.getName().equals(stageObject.getName())) {
             return false;
         }
-        if (!sourceObject.getCode().equals(stageObject.getCode())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getCode().equals(stageObject.getCode());
     }
 
     public void setLogService(LogService logService) {

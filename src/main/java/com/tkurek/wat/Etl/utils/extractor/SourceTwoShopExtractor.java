@@ -97,11 +97,7 @@ public class SourceTwoShopExtractor {
         if (!sourceObject.getAddress().equals(stageObject.getAddress())) {
             return false;
         }
-        if (!sourceObject.getZipCode().equals(stageObject.getZipCode())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getZipCode().equals(stageObject.getZipCode());
     }
 
     public void setLogService(LogService logService) {

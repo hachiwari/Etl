@@ -81,11 +81,7 @@ public class SourceOneTypePriceExtractor {
         if (!sourceObject.getIdTypePrice().equals(stageObject.getIdTypePrice())) {
             return false;
         }
-        if (!sourceObject.getName().equals(stageObject.getName())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getName().equals(stageObject.getName());
     }
 
     public void setLogService(LogService logService) {

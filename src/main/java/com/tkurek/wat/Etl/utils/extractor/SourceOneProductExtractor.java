@@ -6,7 +6,6 @@ import com.tkurek.wat.Etl.model.sourceOne.SourceOne_Product;
 import com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Product;
 import com.tkurek.wat.Etl.service.LogService;
 import com.tkurek.wat.Etl.service.UtilService;
-import com.tkurek.wat.Etl.service.impl.ExtractServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -114,11 +113,7 @@ public class SourceOneProductExtractor {
         if (!sourceObject.getQuantity().equals(stageObject.getQuantity())) {
             return false;
         }
-        if (!sourceObject.getDescription().equals(stageObject.getDescription())) {
-            return false;
-        }
-
-        return true;
+        return sourceObject.getDescription().equals(stageObject.getDescription());
     }
 
     public void setLogService(LogService logService) {

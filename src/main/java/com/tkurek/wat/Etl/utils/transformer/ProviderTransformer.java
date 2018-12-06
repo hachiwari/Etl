@@ -1,9 +1,7 @@
 package com.tkurek.wat.Etl.utils.transformer;
 
 import com.tkurek.wat.Etl.mapper.StageMapper;
-import com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Producer;
 import com.tkurek.wat.Etl.model.stage.sourceOne.Stage_Provider;
-import com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Producer;
 import com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Provider;
 import com.tkurek.wat.Etl.service.LogService;
 import com.tkurek.wat.Etl.service.UtilService;
