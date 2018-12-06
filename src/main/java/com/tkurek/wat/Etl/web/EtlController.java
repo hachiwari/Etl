@@ -1,11 +1,10 @@
 package com.tkurek.wat.Etl.web;
 
+import com.tkurek.wat.Etl.model.sourceCsv.SourceDelivery;
+import com.tkurek.wat.Etl.model.sourceCsv.SourceSale;
 import com.tkurek.wat.Etl.model.warehouse.F_Delivery;
 import com.tkurek.wat.Etl.model.warehouse.F_Sale;
-import com.tkurek.wat.Etl.service.CleanService;
-import com.tkurek.wat.Etl.service.ExtractService;
-import com.tkurek.wat.Etl.service.LoadService;
-import com.tkurek.wat.Etl.service.TransformService;
+import com.tkurek.wat.Etl.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class EtlController {
@@ -25,13 +26,15 @@ public class EtlController {
     private TransformService transformService;
     private LoadService loadService;
     private CleanService cleanService;
+    private UtilService utilService;
 
     @Autowired
-    private EtlController(ExtractService extractService, TransformService transformService, LoadService loadService, CleanService cleanService) {
+    private EtlController(ExtractService extractService, TransformService transformService, LoadService loadService, CleanService cleanService, UtilService utilService) {
         this.extractService = extractService;
         this.transformService = transformService;
         this.loadService = loadService;
         this.cleanService = cleanService;
+        this.utilService = utilService;
     }
 
     @ResponseBody
@@ -74,5 +77,23 @@ public class EtlController {
             LOG.info(String.format("ERROR in cleaned phase - %s!", phaseName));
             return String.format("ERROR in cleaned phase - %s!", phaseName);
         }
+    }
+
+    @ResponseBody
+    @RequestMapping("/showFiles")
+    File[] showFiles() {
+        return utilService.getDirectoryFiles("csv");
+    }
+
+    @ResponseBody
+    @RequestMapping("/showFiles/delivery")
+    List<SourceDelivery> showDeliveryFiles() {
+        return extractService.extractSourceCsvDelivery();
+    }
+
+    @ResponseBody
+    @RequestMapping("/showFiles/sale")
+    List<SourceSale> showSaleFiles() {
+        return extractService.extractSourceCsvSale();
     }
 }

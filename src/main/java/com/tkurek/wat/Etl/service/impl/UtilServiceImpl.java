@@ -48,16 +48,35 @@ public class UtilServiceImpl implements UtilService {
     }
 
     @Override
-    public File[] getResourceFolderFiles(String folder) {
+    public File[] getResourceDirectoryFiles(String directory) {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        URL url = loader.getResource(folder);
+        URL url = loader.getResource(directory);
         String path = Objects.requireNonNull(url).getPath();
         return new File(path).listFiles();
     }
 
     @Override
-    public List<File> getResourceFolderFilesWithPrefix(String folder, String filePrefix) {
-        File[] files = getResourceFolderFiles(folder);
+    public List<File> getResourceDirectoryFilesWithPrefix(String directory, String filePrefix) {
+        File[] files = getResourceDirectoryFiles(directory);
+
+        List<File> filesWithPrefix = new LinkedList<>();
+        for(File file : files) {
+            if (file.getName().startsWith(filePrefix)) {
+                filesWithPrefix.add(file);
+            }
+        }
+        return filesWithPrefix;
+    }
+
+    @Override
+    public File[] getDirectoryFiles(String directory) {
+        File folder = new File(directory);
+        return folder.listFiles();
+    }
+
+    @Override
+    public List<File> getDirectoryFilesWithPrefix(String directory, String filePrefix) {
+        File[] files = getDirectoryFiles(directory);
 
         List<File> filesWithPrefix = new LinkedList<>();
         for(File file : files) {

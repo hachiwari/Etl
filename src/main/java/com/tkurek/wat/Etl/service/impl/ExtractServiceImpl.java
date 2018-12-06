@@ -58,8 +58,9 @@ public class ExtractServiceImpl implements ExtractService {
         LOG.info("Done Extract");
     }
 
-    private List<SourceDelivery> extractSourceCsvDelivery() {
-        List<File> deliveryFiles = this.utilService.getResourceFolderFilesWithPrefix("csv", "Delivery_");
+    @Override
+    public List<SourceDelivery> extractSourceCsvDelivery() {
+        List<File> deliveryFiles = utilService.getDirectoryFilesWithPrefix("csv", "Delivery_");
         List<SourceDelivery> sourceDeliveries = new LinkedList<>();
         for(File file : deliveryFiles) {
             List<Csv_Delivery> csvDeliveries = extractDeliveryCsv(file.getPath());
@@ -71,8 +72,10 @@ public class ExtractServiceImpl implements ExtractService {
         }
         return sourceDeliveries;
     }
-    private List<SourceSale> extractSourceCsvSale() {
-        List<File> saleFiles = this.utilService.getResourceFolderFilesWithPrefix("csv", "Sale_");
+
+    @Override
+    public List<SourceSale> extractSourceCsvSale() {
+        List<File> saleFiles = utilService.getDirectoryFilesWithPrefix("csv", "Sale_");
         List<SourceSale> sourceSales = new LinkedList<>();
         for(File file : saleFiles) {
             List<Csv_Sale> csvSales = extractSaleCsv(file.getPath());
