@@ -45,7 +45,7 @@ public class DeliveryTransformer {
                 .collect(Collectors.toList());
 
         Collection<Stage_Delivery> badDeliveries = this.metadataMapper.selectAllBadDelivery();
-        allObjects.addAll(badDeliveries);
+        allNewObjects.addAll(badDeliveries);
 
         for(Stage_Delivery object : allNewObjects) {
             if (object.getTimestampTo() == null) {

@@ -682,4 +682,8 @@
         select * from tmpFSale;
     </select>
 
+    <delete id="cleanTable">
+        delete from ${tableName};
+    </delete>
+
 </mapper>

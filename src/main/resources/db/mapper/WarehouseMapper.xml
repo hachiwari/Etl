@@ -306,4 +306,8 @@
         where idSale = #{idSale} and timestampTo is null;
     </select>
 
+    <delete id="cleanTable">
+        delete from ${tableName};
+    </delete>
+
 </mapper>

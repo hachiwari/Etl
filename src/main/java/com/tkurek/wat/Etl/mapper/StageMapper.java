@@ -118,4 +118,5 @@ public interface StageMapper {
     Collection<Tmp_F_Delivery> selectAllTmpDelivery();
     Collection<Tmp_F_Sale> selectAllTmpSale();
 
+    void cleanTable(@Param("tableName") String tableName);
 }

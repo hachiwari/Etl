@@ -18,4 +18,6 @@ public interface MetadataMapper {
     void insertBadSale(@Param("sale") Stage_Sale sale);
     Collection<Stage_Delivery> selectAllBadDelivery();
     Collection<Stage_Sale> selectAllBadSale();
+
+    void cleanTable(@Param("tableName") String tableName);
 }

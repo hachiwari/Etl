@@ -283,4 +283,10 @@
         <property name="saleLoader" ref="saleLoader"/>
     </bean>
 
+    <bean id="cleanService" class="com.tkurek.wat.Etl.service.impl.CleanServiceImpl">
+        <property name="metadataMapper" ref="metadataMapper"/>
+        <property name="stageMapper" ref="stageMapper"/>
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+    </bean>
+
 </beans>

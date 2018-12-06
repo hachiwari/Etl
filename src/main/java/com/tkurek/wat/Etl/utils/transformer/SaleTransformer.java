@@ -45,7 +45,7 @@ public class SaleTransformer {
                 .collect(Collectors.toList());
 
         Collection<Stage_Sale> badSales = this.metadataMapper.selectAllBadSale();
-        allObjects.addAll(badSales);
+        allNewObjects.addAll(badSales);
 
         for(Stage_Sale object : allNewObjects) {
             if (object.getTimestampTo() == null) {

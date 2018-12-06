@@ -45,4 +45,5 @@ public interface WarehouseMapper {
     void updateFSale(@Param("sale") F_Sale sale);
     F_Sale selectLastFSale(@Param("idSale") Long idSale);
 
+    void cleanTable(@Param("tableName") String tableName);
 }

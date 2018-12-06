@@ -3,9 +3,7 @@ package com.tkurek.wat.Etl.utils.load;
 import com.tkurek.wat.Etl.mapper.StageMapper;
 import com.tkurek.wat.Etl.mapper.WarehouseMapper;
 import com.tkurek.wat.Etl.model.stage.tmp.Tmp_F_Delivery;
-import com.tkurek.wat.Etl.model.stage.tmp.Tmp_W_Producer;
 import com.tkurek.wat.Etl.model.warehouse.F_Delivery;
-import com.tkurek.wat.Etl.model.warehouse.W_Producer;
 import com.tkurek.wat.Etl.service.LogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +39,7 @@ public class DeliveryLoader {
                 .filter(stage -> (stage.getTimestampFrom().after(lastImport) || stage.getTimestampTo() != null && stage.getTimestampTo().after(lastImport)))
                 .collect(Collectors.toList());
 
-        for(Tmp_F_Delivery object : allNewStages) {
+        for (Tmp_F_Delivery object : allNewStages) {
             F_Delivery lastObject = this.warehouseMapper.selectLastFDelivery(object.getIdDelivery());
 
             if (lastObject != null) {
